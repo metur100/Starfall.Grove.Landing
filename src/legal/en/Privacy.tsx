@@ -1,10 +1,9 @@
-import site from '../../site.json';
-import { Address, Email } from './Layout';
+import { Email, Publisher, updated } from '../Layout';
 
 export default function Privacy() {
   return (
     <>
-      <p className="updated">Last updated: {site.updated}</p>
+      <p className="updated">Last updated: {updated()}</p>
 
       <div className="summary">
         <p><strong>In short:</strong> Starfall Grove does not collect any personal data. There are no accounts, no ads, no analytics and no tracking. Your progress is saved only on your own device, and we never receive it.</p>
@@ -14,7 +13,7 @@ export default function Privacy() {
 
       <h2>1. Who is responsible</h2>
       <p>The game is made and published by:</p>
-      <Address email />
+      <Publisher />
 
       <h2>2. What the game saves on your device</h2>
       <p>To remember your adventure, the game uses your browser's or app's local storage on your own device. This data never leaves your device, and nobody else can see it, including us. It contains:</p>

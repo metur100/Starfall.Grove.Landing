@@ -4,6 +4,7 @@
 // when it first comes into view); the names and markers are drawn over it here, as src/game/render.ts does in the game.
 // Drag to pan, pinch or scroll to zoom. It only draws when something changes, so an open map costs a phone nothing.
 import maps from './maps.json';
+import { ui } from './i18n';
 
 type LandId = 'meadow' | 'woods' | 'summit' | 'ember';
 type Land = (typeof maps.lands)[number];
@@ -127,7 +128,7 @@ export function setupWorldMap(base: string) {
     for (const l of maps.lands) {
       const [x] = P((l.x0 + l.x1) / 2, 0), fs = Math.round(clamp(S * 420, 13, 26));
       if (x < -300 || x > w + 300) continue;
-      const y = Math.max(oy, 0) + fs + 8, sub = `Chapter ${l.chapter} · Lv ${l.levels[0]}–${l.levels[1]}`;
+      const y = Math.max(oy, 0) + fs + 8, sub = `${ui.map.chapter} ${l.chapter} · ${ui.map.lv} ${l.levels[0]}–${l.levels[1]}`;
       g.font = `900 ${fs}px ${DISPLAY}`; g.lineWidth = 4; g.strokeStyle = alpha(PAPER, .92);
       g.strokeText(l.title, x, y); g.fillStyle = '#7a3322'; g.fillText(l.title, x, y);
       g.font = `800 ${Math.max(10, fs * .5)}px ${UI}`; g.strokeText(sub, x, y + fs * .75); g.fillStyle = alpha(INK, .75); g.fillText(sub, x, y + fs * .75);
@@ -140,8 +141,8 @@ export function setupWorldMap(base: string) {
 
   // The tabs: the whole valley, or one land.
   const tabFor = (id: string) => tabs.querySelector<HTMLButtonElement>(`[data-land="${id}"]`);
-  tabs.innerHTML = [`<button type="button" data-land="all">Whole valley<small>All ${maps.lands.length} lands</small></button>`,
-    ...maps.lands.map(l => `<button type="button" data-land="${l.id}">${l.title}<small>Lv ${l.levels[0]}–${l.levels[1]}</small></button>`)].join('');
+  tabs.innerHTML = [`<button type="button" data-land="all">${ui.map.wholeValley}<small>${ui.map.allLands(maps.lands.length)}</small></button>`,
+    ...maps.lands.map(l => `<button type="button" data-land="${l.id}">${l.title}<small>${ui.map.lv} ${l.levels[0]}–${l.levels[1]}</small></button>`)].join('');
   function jump(id: LandId | 'all', redraw = true) {
     here = id;
     if (id === 'all') { view.S = fitAll(); view.cx = W / 2; view.cy = H / 2; }
@@ -156,8 +157,9 @@ export function setupWorldMap(base: string) {
   const touch = matchMedia('(pointer: coarse)').matches;
   function setLegend(l: Land) {
     const item = (c: string, label: string) => `<span><i style="background:${c}"></i>${label}</span>`;
-    legend.innerHTML = item(l.accent, l.keyLabel) + item('#ffd35c', 'Shop &amp; chest') + item('#ffb347', 'Campfire') + item('#9fd8ff', 'Fountain')
-      + item('#ff6b5b', 'Guardian') + item('#e8a0ff', 'Heroic foe') + `<span class="map-how">${touch ? 'Drag · pinch to zoom' : 'Drag · scroll to zoom'}</span>`;
+    const m = ui.map;
+    legend.innerHTML = item(l.accent, m.keyLabel[l.id as LandId] ?? l.keyLabel) + item('#ffd35c', m.shopChest) + item('#ffb347', m.campfire) + item('#9fd8ff', m.fountain)
+      + item('#ff6b5b', m.guardian) + item('#e8a0ff', m.heroic) + `<span class="map-how">${touch ? m.dragPinch : m.dragScroll}</span>`;
   }
 
   // Drag to pan, two fingers or the wheel to zoom, or the buttons.

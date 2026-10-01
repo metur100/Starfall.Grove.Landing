@@ -2,12 +2,12 @@
   "name": "Starfall Grove",
   "developer": "Medin Turkes",
   "email": "certidevelopment@gmail.com",
-  "addressLine1": "[street and number]",
-  "addressLine2": "[postcode and city]",
-  "country": "[country]",
+  "addressLine1": "",
+  "addressLine2": "",
+  "country": "Germany",
   "siteUrl": "https://starfallgrove.eu/",
   "gameUrl": "https://metur100.github.io/Starfall.Grove/",
   "playStoreUrl": "",
   "appStoreUrl": "",
-  "updated": "30 September 2026"
+  "updated": "2026-10-01"
 }

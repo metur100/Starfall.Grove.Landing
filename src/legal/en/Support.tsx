@@ -1,4 +1,4 @@
-import { Email, route } from './Layout';
+import { Email, route } from '../Layout';
 
 export default function Support() {
   return (

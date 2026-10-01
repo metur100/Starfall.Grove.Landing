@@ -1,5 +1,5 @@
-import site from '../../site.json';
-import { Address, Email } from './Layout';
+import site from '../../../site.json';
+import { Address, Email } from '../Layout';
 
 export default function Imprint() {
   return (

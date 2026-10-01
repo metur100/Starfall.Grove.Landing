@@ -8,6 +8,7 @@ import Select from './Select';
 import site from '../site.json';
 import { setupPage } from './site-page';
 import { setupWorldMap } from './worldMap';
+import { ui } from './i18n';
 
 // The landing page. Everything you read is plain HTML in landing/index.html; this adds what moves: the paper diorama
 // behind the hero section, the cast standing on its front hill, the hero select, and the intro films. Each moving
@@ -61,7 +62,7 @@ const film = document.getElementById('film') as HTMLDialogElement | null;
 const video = film?.querySelector('video');
 const openFilm = (id: HeroId | 'valley') => {
   if (!film || !video) return;
-  film.querySelector('[data-film-title]')!.textContent = id === 'valley' ? 'Starfall Grove' : `${HEROES[id].name}, ${HEROES[id].title}`;
+  film.querySelector('[data-film-title]')!.textContent = id === 'valley' ? 'Starfall Grove' : `${HEROES[id].name}, ${ui.hero[id].title ?? HEROES[id].title}`;
   video.src = id === 'valley' ? `${import.meta.env.BASE_URL}Intro.mp4` : `${site.gameUrl}intro/${id}.mp4`;
   film.showModal();
   video.play().catch(() => { /* the controls are there to start it */ });

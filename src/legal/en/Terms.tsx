@@ -1,10 +1,10 @@
-import site from '../../site.json';
-import { Email } from './Layout';
+import site from '../../../site.json';
+import { Email, updated } from '../Layout';
 
 export default function Terms() {
   return (
     <>
-      <p className="updated">Last updated: {site.updated}</p>
+      <p className="updated">Last updated: {updated()}</p>
 
       <p>These terms apply when you play Starfall Grove in a web browser, as the Android app or as the iOS app ("the game"). The game is made by {site.developer} ("we", "us"). By playing, you agree to these terms.</p>
 

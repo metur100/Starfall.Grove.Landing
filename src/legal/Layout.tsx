@@ -1,11 +1,14 @@
-// The frame every legal and help page shares: the bar at the top, the parchment page and the footer.
+// The frame every legal and help page shares, in the page's language: the bar at the top with the language switcher,
+// the parchment page and the footer.
 import { useEffect, type ReactNode } from 'react';
 import site from '../../site.json';
 import { setupPage } from '../site-page';
+import { LOCALE, localHref, ui } from '../i18n';
+import { LANGUAGE, LOCALES } from '../i18n/locales';
 import { legalRoutes, legalSlugs, type LegalSlug } from './routes';
 
-/** A page of the site, from the site's root (works under any sub-path the site is hosted on). */
-export const href = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+/** A page of the site in this language (works under any sub-path the site is hosted on). */
+export const href = (path: string) => localHref(path);
 export const route = (slug: LegalSlug) => href(`${slug}/`);
 
 /** The publisher's email as a link (site.json `email`). */
@@ -13,16 +16,25 @@ export const Email = ({ subject }: { subject?: string }) => (
   <a href={`mailto:${site.email}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`}>{site.email}</a>
 );
 
-/** The publisher's postal address card (site.json). */
-export const Address = ({ email }: { email?: boolean }) => (
-  <address className="contact-card">
-    <strong>{site.developer}</strong><br />
-    {site.addressLine1}<br />
-    {site.addressLine2}<br />
-    {site.country}
-    {email && <><br />Email: <Email /></>}
-  </address>
+/** The date the legal pages last changed (site.json `updated`, as YYYY-MM-DD), written the way this language writes dates. */
+export const updated = () => new Date(`${site.updated}T12:00:00`).toLocaleDateString(LOCALE === 'en' ? 'en-GB' : LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
+
+/** The publisher's name and email. */
+export const Publisher = () => (
+  <address className="contact-card"><strong>{site.developer}</strong><br />{ui.legal.email}: <Email /></address>
 );
+
+/** The publisher's postal address card (site.json). Lines left empty there are left out. */
+export const Address = ({ email, country }: { email?: boolean; country?: string }) => {
+  const lines = [site.addressLine1, site.addressLine2, country ?? site.country].filter(Boolean);
+  return (
+    <address className="contact-card">
+      <strong>{site.developer}</strong>
+      {lines.map(l => <span key={l}><br />{l}</span>)}
+      {email && <><br />{ui.legal.email}: <Email /></>}
+    </address>
+  );
+};
 
 export function BrandStar() {
   const star = 'M32 5 L38 26 L59 32 L38 38 L32 59 L26 38 L5 32 L26 26 Z';
@@ -38,40 +50,44 @@ export function BrandStar() {
 
 export function Layout({ slug, children }: { slug: LegalSlug; children: ReactNode }) {
   useEffect(() => setupPage(), []);
+  const t = ui.legal, routes = legalRoutes[LOCALE];
   return (
     <>
-      <a className="skip" href="#content">Skip to content</a>
+      <a className="skip" href="#content">{t.skip}</a>
       <header className="site-nav">
-        <a className="brand" href={href('')} aria-label="Starfall Grove home">
+        <a className="brand" href={href('')} aria-label={t.home}>
           <BrandStar />
           <span>Starfall Grove</span>
         </a>
-        <nav className="nav-links" aria-label="Site">
-          <a href={href('#story')}>Story</a>
-          <a href={href('#heroes')}>Heroes</a>
-          <a href={href('#world')}>World</a>
-          <a href={route('support')} aria-current={slug === 'support' ? 'page' : undefined}>Support</a>
+        <nav className="nav-links" aria-label={t.site}>
+          <a href={href('#story')}>{t.story}</a>
+          <a href={href('#heroes')}>{t.heroes}</a>
+          <a href={href('#world')}>{t.world}</a>
+          <a href={route('support')} aria-current={slug === 'support' ? 'page' : undefined}>{t.support}</a>
+          <span className="lang-switch" role="group" aria-label={t.languages}>
+            {LOCALES.map(l => <a key={l} href={localHref(`${slug}/`, l)} hrefLang={l} lang={l} title={LANGUAGE[l].name} aria-current={l === LOCALE ? 'true' : undefined}>{LANGUAGE[l].short}</a>)}
+          </span>
         </nav>
-        <button className="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+        <button className="nav-toggle" type="button" aria-label={t.menu} aria-expanded="false"><i></i><i></i><i></i></button>
       </header>
 
       <main id="content">
         <article className="legal page">
           <small className="page-eyebrow">Starfall Grove</small>
-          <h1>{legalRoutes[slug].title}</h1>
+          <h1>{routes[slug].title}</h1>
           {children}
         </article>
       </main>
 
       <footer className="site-foot">
         <div className="wrap foot-grid">
-          <div className="foot-brand"><strong>Starfall Grove</strong><p>A pop-up storybook action RPG for browser, Android and iOS.</p></div>
-          <nav aria-label="Legal and help">
+          <div className="foot-brand"><strong>Starfall Grove</strong><p>{t.tagline}</p></div>
+          <nav aria-label={t.legalNav}>
             {legalSlugs.map(s => (
-              <a key={s} href={route(s)} aria-current={s === slug ? 'page' : undefined}>{legalRoutes[s].title}</a>
+              <a key={s} href={route(s)} aria-current={s === slug ? 'page' : undefined}>{routes[s].title}</a>
             ))}
           </nav>
-          <p className="foot-copy">© {new Date().getFullYear()} {site.developer}. All rights reserved.</p>
+          <p className="foot-copy">© {new Date().getFullYear()} {site.developer}. {t.rights}</p>
         </div>
       </footer>
     </>

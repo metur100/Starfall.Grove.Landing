@@ -23,11 +23,20 @@ The site lives at **https://starfallgrove.eu/**. All paths start from the path i
 
 | Key | What it is |
 | --- | --- |
-| `developer`, `email`, `addressLine1`, `addressLine2`, `country` | The publisher, shown in the privacy policy, terms, support page and imprint |
+| `developer`, `email`, `addressLine1`, `addressLine2`, `country` | The publisher. The privacy policy shows the name and email; the imprint shows the address too (empty lines are left out). `country` is in English (`Germany`); the German and Bosnian pages translate it |
 | `siteUrl` | Where this website is hosted, ending in `/`. Used for canonical links, the link-preview image and the base path of every asset and route |
 | `gameUrl` | Where the browser game is hosted, ending in `/`. Every Play button links here, and the intro films stream from `<gameUrl>intro/<hero>.mp4` |
 | `playStoreUrl`, `appStoreUrl` | Store pages. A badge shows **Soon** while its link is empty |
-| `updated` | The "last updated" date on the legal pages |
+| `updated` | The "last updated" date on the legal pages, as `YYYY-MM-DD`; each language writes it its own way |
+
+## Languages
+
+The site is in English (at the root), German (`/de/`) and Bosnian (`/bs/`). Every page, the legal ones too, is written once per language at build time, with `hreflang` links between the copies and a switcher (EN · DE · BS) in the top bar. The game itself is in English, so names of heroes, places, guardians and spells, and the game's menu labels, stay as the game has them.
+
+- `src/i18n/locales.ts`: the languages. To add one, add it here and give it the files below.
+- `src/i18n/page.<lang>.ts`: the landing page's words. `index.html` holds `%t.key%` where each goes, and the build stops if a language is missing a key.
+- `src/i18n/ui.<lang>.ts`: the words the scripts write: the hero select (with the heroes' stories and the spell descriptions), the map and the legal pages' frame. English leaves the heroes' titles and descriptions and the spells out, so they come straight from the game.
+- `src/legal/<lang>/`: the legal and help pages, and `src/legal/routes.ts` their titles.
 
 ## The pages
 
@@ -36,7 +45,7 @@ The site lives at **https://starfallgrove.eu/**. All paths start from the path i
   - **Main sections:** the story, the hero select, the four lands, features, platforms and FAQ.
   - **The lands:** each card opens the map of that land, fully explored, as the game's map screen shows it. You can switch to another land or the whole valley, drag to pan and pinch or scroll to zoom.
   - **The hero select** copies the game's character screen. It has the rune pedestal (drag to turn the hero), traits, abilities, the roster, and each hero's story and guardians. It also has a legendary set to try on, and the hero's intro film.
-- `/privacy/`, `/terms/`, `/support/`, `/imprint/`: the legal and help pages the store listings need. Each is a React component in `src/legal/`. Every route is served from one shell, `legal.html`, which the build copies to `<route>/index.html` with that route's title and description (from `src/legal/routes.ts`). To add a page, add it to `routes.ts` and to the `pages` map in `src/legal/main.tsx`.
+- `/privacy/`, `/terms/`, `/support/`, `/imprint/` (and the same under `/de/` and `/bs/`): the legal and help pages the store listings need. Each language's pages are React components in `src/legal/<lang>/`. Every route is served from one shell, `legal.html`, which the build copies to `[<lang>/]<route>/index.html` with that route's title and description (from `src/legal/routes.ts`). To add a page, add it to `routes.ts` and to each language's `pages`.
   - The privacy policy describes the game as it is: saves stay on the device, and there are no accounts, ads or analytics.
   - It also names **GitHub Pages** as the host of the website and the browser game. Update section 5 if you host either somewhere else, and update the policy if the game ever starts collecting data.
 
@@ -75,7 +84,8 @@ src/
   worldMap.ts        The map modal: the baked lands with their names and markers, pan and zoom
   maps.json          The places and markers on the map (from bake-maps)
   site-page.ts       What every page shares: fonts, styles, store badges, menu, reveals
-  legal/             The legal and help pages: routes, the shared layout, one component per page
+  i18n/              The languages and their words (above)
+  legal/             The legal and help pages: routes, the shared layout, and each language's pages
   game-art/          The copy of the game's art (above)
 ```
 
