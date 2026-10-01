@@ -9,16 +9,18 @@ npm run build    # type-check and build into dist/
 npm run preview  # preview the build
 ```
 
-`dist/` is a static site that you can host anywhere. Every path is relative, so it also works under a sub-path.
+`dist/` is a static site. Every push to `master` builds it and publishes it to GitHub Pages (`.github/workflows/deploy.yml`). In the repository settings, set **Pages → Source** to **GitHub Actions** once.
+
+All paths start from the path in `siteUrl` (for example `/Starfall.Grove.Landing/`), so in development the site is at `http://localhost:5173/Starfall.Grove.Landing/`. If you move the site to a custom domain, change `siteUrl` and everything follows.
 
 ## Settings
 
-`site.json` holds everything that isn't copy. At build time, every page fills `%site.key%` from it, and the scripts import it:
+`site.json` holds everything that isn't copy. At build time, the HTML fills `%site.key%` from it, and the scripts and pages import it:
 
 | Key | What it is |
 | --- | --- |
 | `developer`, `email`, `addressLine1`, `addressLine2`, `country` | The publisher, shown in the privacy policy, terms, support page and imprint |
-| `siteUrl` | Where this website is hosted, ending in `/`. Used for canonical links and the link-preview image |
+| `siteUrl` | Where this website is hosted, ending in `/`. Used for canonical links, the link-preview image and the base path of every asset and route |
 | `gameUrl` | Where the browser game is hosted, ending in `/`. Every Play button links here, and the intro films stream from `<gameUrl>intro/<hero>.mp4` |
 | `playStoreUrl`, `appStoreUrl` | Store pages. A badge shows **Soon** while its link is empty |
 | `updated` | The "last updated" date on the legal pages |
@@ -29,7 +31,7 @@ npm run preview  # preview the build
   - **Top section:** the paper diorama at night, with the logo, play and store buttons, and the five heroes standing together on the front hill.
   - **Main sections:** the story, the hero select, the four lands, features, platforms and FAQ.
   - **The hero select** copies the game's character screen. It has the rune pedestal (drag to turn the hero), traits, abilities, the roster, and each hero's story and guardians. It also has a legendary set to try on, and the hero's intro film.
-- `privacy.html`, `terms.html`, `support.html`, `imprint.html`: the legal and help pages the store listings need.
+- `/privacy/`, `/terms/`, `/support/`, `/imprint/`: the legal and help pages the store listings need. Each is a React component in `src/legal/`. Every route is served from one shell, `legal.html`, which the build copies to `<route>/index.html` with that route's title and description (from `src/legal/routes.ts`). To add a page, add it to `routes.ts` and to the `pages` map in `src/legal/main.tsx`.
   - The privacy policy describes the game as it is: saves stay on the device, and there are no accounts, ads or analytics.
   - It also names **GitHub Pages** as the host of the website and the browser game. Update section 5 if you host either somewhere else, and update the policy if the game ever starts collecting data.
 
@@ -44,7 +46,8 @@ npm run sync-art -- ../path/to/Starfall.Grove
 ## Code
 
 ```text
-index.html, privacy.html, terms.html, support.html, imprint.html
+index.html           The landing page
+legal.html           The shell of the legal and help routes
 landing.css          The whole site: the game's cardstock and parchment look, phones first
 site.json            Settings (above)
 public/              Icons and the link-preview image
@@ -55,7 +58,7 @@ src/
   Select.tsx         The hero select section
   heroes.ts          Each hero's story, guardians, traits and land
   site-page.ts       What every page shares: fonts, styles, store badges, menu, reveals
-  site-legal.ts      The entry point of the legal pages
+  legal/             The legal and help pages: routes, the shared layout, one component per page
   game-art/          The copy of the game's art (above)
 ```
 
