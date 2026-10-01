@@ -8,9 +8,27 @@
     <meta name="theme-color" content="#1d1520" />
     <title>%page.title% · Starfall Grove</title>
     <meta name="description" content="%page.description%" />
+    <meta name="author" content="%site.developer%" />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="%page.url%" />
 %page.alternates%
-    <link rel="icon" type="image/png" href="/icon-192.png" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Starfall Grove" />
+    <meta property="og:title" content="%page.title% · Starfall Grove" />
+    <meta property="og:description" content="%page.description%" />
+    <meta property="og:url" content="%page.url%" />
+    <meta property="og:locale" content="%page.ogLocale%" />
+%page.ogAlternates%
+    <meta property="og:image" content="%page.ogImage%" />
+    <meta property="og:image:alt" content="%page.imageAlt%" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="%page.title% · Starfall Grove" />
+    <meta name="twitter:description" content="%page.description%" />
+    <meta name="twitter:image" content="%page.ogImage%" />
+    <link rel="icon" type="image/png" sizes="192x192" href="%page.base%icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%page.base%apple-touch-icon.png" />
+    <link rel="manifest" href="%page.base%site.webmanifest" />
+    %page.ld%
   </head>
   <body class="legal-page" data-page="%page.slug%">
     <div id="root">

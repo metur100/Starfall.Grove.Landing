@@ -12,7 +12,7 @@ export const PITCH: Record<HeroId, HeroPitch> = {
   kael: { guardians: ['The Hollow Bulwark', 'Ser Briarthorn', 'The Frost Marshal', 'The Iron Colossus', 'The Black Oath'], land: 'meadow' },
   lyra: { guardians: ['Gloamgill', 'The Pale Huntress', 'Queen Hoarfrost', 'Cinderwyrm', 'The Endless Winter Night'], land: 'woods' },
   riven: { guardians: ['Corvane', 'Silkmother Vesh', 'Nullface', 'The Ashen Broker', 'The Shadow That Chose'], land: 'ember' },
-  wren: { guardians: ['Gorehide', 'Shadowmane', 'Skyhorn', 'The Duneworm', 'The Moon-Eater'], land: 'meadow' },
+  wren: { guardians: ['Gorehide', 'Duskmane', 'Starhorn', 'The Duneworm', 'The Moon-Eater'], land: 'meadow' },
 };
 
 /** How each hero plays, as the game's own select screen shows it (pips out of five). */

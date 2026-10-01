@@ -49,6 +49,18 @@ The site is in English (at the root), German (`/de/`) and Bosnian (`/bs/`). Ever
   - The privacy policy describes the game as it is: saves stay on the device, and there are no accounts, ads or analytics.
   - It also names **GitHub Pages** as the host of the website and the browser game. Update section 5 if you host either somewhere else, and update the policy if the game ever starts collecting data.
 
+## Search engines and link previews
+
+`src/seo.ts` writes everything crawlers and link previews read, at build time, from `site.json` and each language's words:
+
+- **Every page:** a title and description in its language, `canonical` and `hreflang` links (with `x-default`), `robots`, author, Open Graph (with `og:locale:alternate` and the image's size, type and alt text) and Twitter cards, icons and the web manifest (`site.webmanifest`).
+- **The home page:** keywords (`meta.keywords`), the intro film as `og:video`, and structured data (JSON-LD) in its language: the website, its publisher, the game as a `VideoGame` (free, its platforms, heroes and lands, the intro film as its trailer, and the store pages once they are set) and the page's FAQ.
+- **The legal pages:** their own Open Graph tags and structured data, with a breadcrumb back to the home page.
+- **`sitemap.xml`:** every page in every language, with links to its other languages and the date in `updated`. **`robots.txt`** allows everything and points to it.
+- **`404.html`:** GitHub Pages shows it for addresses that don't exist. It isn't indexed and links back home.
+
+The link-preview image's size is in `OG_IMAGE` (`src/seo.ts`); change it there if `public/og-image.png` changes. Once the site is live, submit `https://starfallgrove.eu/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
+
 ## The game's art
 
 The heroes, pedestal, portraits and diorama are drawn by the game's own code, so they always look as they do in the game. `src/game-art/` is a copy of those files from the game's `src/`, with the same folder layout, imported as `@game/…`. Don't edit them here. After the game's art, heroes or spells change, copy them again:
@@ -84,6 +96,7 @@ src/
   worldMap.ts        The map modal: the baked lands with their names and markers, pan and zoom
   maps.json          The places and markers on the map (from bake-maps)
   site-page.ts       What every page shares: fonts, styles, store badges, menu, reveals
+  seo.ts             Structured data, sitemap, robots.txt, web manifest and the 404 page (written at build time)
   i18n/              The languages and their words (above)
   legal/             The legal and help pages: routes, the shared layout, and each language's pages
   game-art/          The copy of the game's art (above)

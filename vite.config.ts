@@ -7,6 +7,7 @@ import { page as en } from './src/i18n/page.en';
 import { page as de } from './src/i18n/page.de';
 import { page as bs } from './src/i18n/page.bs';
 import { legalRoutes, legalSlugs, type LegalSlug } from './src/legal/routes';
+import { OG_IMAGE, attr, homeLd, legalLd, manifest, notFound, ogAlternates, robots, sitemap } from './src/seo';
 
 // The Starfall Grove website, a project of its own. It draws the heroes with the game's own paper art: a copy of the
 // game's sources in src/game-art/, imported as `@game/…`. Refresh it with `npm run sync-art -- <game repo>`.
@@ -37,7 +38,9 @@ const pathOf = (base: string, l: Locale, path: string) => `${base}${prefix(l)}${
 const localeVars = (base: string, l: Locale, path: string): Record<string, string> => {
   const url = (x: Locale) => `${readSite().siteUrl}${prefix(x)}${path}`;
   return {
-    lang: l, ogLocale: LANGUAGE[l].og, url: url(l), noscript: NOSCRIPT[l],
+    lang: l, ogLocale: LANGUAGE[l].og, url: url(l), noscript: NOSCRIPT[l], base,
+    ogAlternates: ogAlternates(Object.fromEntries(LOCALES.map(x => [x, LANGUAGE[x].og])), l),
+    ogImage: `${readSite().siteUrl}${OG_IMAGE.path}`, ogImageW: String(OG_IMAGE.width), ogImageH: String(OG_IMAGE.height), ogImageType: OG_IMAGE.type,
     alternates: [...LOCALES.map(x => `    <link rel="alternate" hreflang="${x}" href="${url(x)}" />`), `    <link rel="alternate" hreflang="x-default" href="${url('en')}" />`].join('\n'),
     langSwitch: `<span class="lang-switch" role="group" aria-label="${LANGUAGE_LABEL[l]}">${LOCALES.map(x =>
       `<a href="${pathOf(base, x, path)}" hreflang="${x}" lang="${x}" title="${LANGUAGE[x].name}"${x === l ? ' aria-current="true"' : ''}>${LANGUAGE[x].short}</a>`).join('')}</span>`,
@@ -46,7 +49,8 @@ const localeVars = (base: string, l: Locale, path: string): Record<string, strin
 
 /** The home page in one language: its words (`%t.key%`) and what it knows about its language (`%page.key%`). */
 const fillHome = (html: string, base: string, l: Locale) => {
-  const words = WORDS[l], vars = localeVars(base, l, '');
+  const words = WORDS[l], vars: Record<string, string> = { ...localeVars(base, l, ''), imageAlt: attr(words['meta.imageAlt']) };
+  vars.ld = homeLd(readSite(), l, vars.url, words, LOCALES);
   return html
     .replace(/%t\.([\w.]+)%/g, (m, k: string) => { if (!(k in words)) throw new Error(`No ${l} words for ${k}`); return words[k]; })
     .replace(/%page\.(\w+)%/g, (m, k: string) => k in vars ? vars[k] : m);
@@ -55,7 +59,8 @@ const fillHome = (html: string, base: string, l: Locale) => {
 /** Writes the home page and each legal page (`<base>[lang/]<slug>/`, all from legal.html) in every language. */
 const pages = (base: string): Plugin => {
   const fillLegal = (html: string, l: Locale, slug: LegalSlug) => {
-    const vars: Record<string, string> = { slug, ...legalRoutes[l][slug], ...localeVars(base, l, `${slug}/`) };
+    const r = legalRoutes[l][slug], vars: Record<string, string> = { slug, ...r, ...localeVars(base, l, `${slug}/`), imageAlt: attr(WORDS[l]['meta.imageAlt']) };
+    vars.ld = legalLd(readSite(), l, vars.url, `${readSite().siteUrl}${prefix(l)}`, readSite().name, r.title, r.description);
     return html.replace(/%page\.(\w+)%/g, (m, k: string) => k in vars ? vars[k] : m);
   };
   const shell = resolve(__dirname, 'legal.html');
@@ -92,6 +97,12 @@ const pages = (base: string): Plugin => {
         for (const l of LOCALES) for (const slug of legalSlugs) this.emitFile({ type: 'asset', fileName: `${prefix(l)}${slug}/index.html`, source: fillLegal(String(legal.source), l, slug) });
         delete bundle['legal.html'];
       }
+      // What crawlers and phones read besides the pages.
+      const s = readSite();
+      this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: sitemap(s, ['', ...legalSlugs.map(x => `${x}/`)], LOCALES, prefix) });
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: robots(s) });
+      this.emitFile({ type: 'asset', fileName: 'site.webmanifest', source: manifest(s, base, WORDS.en['meta.ogDescription']) });
+      this.emitFile({ type: 'asset', fileName: '404.html', source: notFound(s, base) });
     },
   };
 };

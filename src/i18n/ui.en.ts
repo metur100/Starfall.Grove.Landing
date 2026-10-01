@@ -42,7 +42,7 @@ export const ui: UI = {
     kael: { epithet: 'The Oathsworn', story: 'Ser Aldric made his last stand the night the Beacon died. Kael musters the farms and the city guard, finds the Wardens’ lost hall and swears to bring his knight home.' },
     lyra: { epithet: 'Winter’s Daughter', story: 'Her sister Nessa vanished on the lake road, her letters scattered in the snow. Following them, Lyra learns her family are Rimewards, frost-singers, and that some songs need two voices.' },
     riven: { epithet: 'The Foundling', story: 'His last contract for the Hushed ended in black feathers and a shadow he knew. Riven steals the Beacon’s crystals back, finds the foundling house he grew up in and faces a double wearing his face.' },
-    wren: { epithet: 'The Pack', companion: 'Fenn the wolf', story: 'The valley blames the wolves. Wren knows better: her pack ran into the shadow the night the star fell. With Fenn at her heel she hunts the truth and goes looking for Moonfang.' },
+    wren: { epithet: 'The Pack', companion: 'Fenn the wolf', story: 'The valley blames the wolves. Wren knows better: her pack ran into the shadow the night the star fell. With Fenn at her heel she hunts the truth and goes looking for Snowmoon.' },
   },
   spells: {},
   map: {
