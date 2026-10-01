@@ -7,12 +7,14 @@ import { createLineup } from './lineup';
 import Select from './Select';
 import site from '../site.json';
 import { setupPage } from './site-page';
+import { setupWorldMap } from './worldMap';
 
 // The landing page. Everything you read is plain HTML in landing/index.html; this adds what moves: the paper diorama
 // behind the hero section, the cast standing on its front hill, the hero select, and the intro films. Each moving
 // piece is only drawn while it is on screen, so a phone scrolling the page only ever animates one of them.
 
 setupPage();
+setupWorldMap(import.meta.env.BASE_URL);
 
 /** Calls `on(true)` when the element comes on screen and `on(false)` when it leaves. */
 function watch(el: Element, on: (shown: boolean) => void, margin = '120px') {

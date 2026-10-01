@@ -59,18 +59,13 @@
           <h1 id="hero-title" class="logo"><span>Starfall</span><span>Grove</span></h1>
           <p class="hero-tag">Four lands. Five heroes. One fallen star.</p>
           <div class="cta-row">
-            <a class="btn primary big" href="%site.gameUrl%"><span>Play in <span class="long">your </span>browser</span> <b>→</b></a>
-            <button class="btn ghost big" type="button" data-film="mira"><i class="play-dot" aria-hidden="true"></i><span>Watch <span class="long">the </span>intro</span></button>
+            <a class="btn primary big" href="%site.gameUrl%"><span>Play <span class="long">now </span>in your browser</span> <b>→</b></a>
+            <button class="watch" type="button" data-film="mira"><i class="watch-ring" aria-hidden="true"></i><span>Watch <span class="long">the </span>intro</span></button>
           </div>
-          <div class="stores" aria-label="App stores">
-            <a class="store-badge soon" data-store="play" href="#play" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34d399" d="M3.6 1.8 13.4 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1Z" /><path fill="#fbbf24" d="m16.8 8.6-3.4 3.4 3.4 3.4 3.9-2.2c1.1-.6 1.1-1.8 0-2.4l-3.9-2.2Z" /><path fill="#60a5fa" d="M3.6 1.8c.3-.2.8-.2 1.3.1l11.9 6.7-3.4 3.4L3.6 1.8Z" /><path fill="#f87171" d="m13.4 12 3.4 3.4-11.9 6.7c-.5.3-1 .3-1.3.1L13.4 12Z" /></svg>
-              <span><small>Get it on</small><b>Google Play</b></span><em class="badge-soon">Soon</em>
-            </a>
-            <a class="store-badge soon" data-store="apple" href="#play" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.6-1-2.6-4.1ZM13.9 5c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.1.1 2.3-.6 3-1.5Z" /></svg>
-              <span><small>Download on the</small><b>App Store</b></span><em class="badge-soon">Soon</em>
-            </a>
+          <div class="hero-stores" aria-label="App stores">
+            <span class="hero-stores-label">Also on</span>
+            <a class="store-chip soon" data-store="play" href="#play" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34d399" d="M3.6 1.8 13.4 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1Z" /><path fill="#fbbf24" d="m16.8 8.6-3.4 3.4 3.4 3.4 3.9-2.2c1.1-.6 1.1-1.8 0-2.4l-3.9-2.2Z" /><path fill="#60a5fa" d="M3.6 1.8c.3-.2.8-.2 1.3.1l11.9 6.7-3.4 3.4L3.6 1.8Z" /><path fill="#f87171" d="m13.4 12 3.4 3.4-11.9 6.7c-.5.3-1 .3-1.3.1L13.4 12Z" /></svg><span>Google Play</span><em class="badge-soon">Soon</em></a>
+            <a class="store-chip soon" data-store="apple" href="#play" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.6-1-2.6-4.1ZM13.9 5c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.1.1 2.3-.6 3-1.5Z" /></svg><span>App Store</span><em class="badge-soon">Soon</em></a>
           </div>
         </div>
         <div class="cast-wrap">
@@ -138,36 +133,43 @@
         <div class="wrap lands">
           <article class="land reveal" style="--s1:#141a3a;--s2:#2e2e62;--s3:#b8707a;--h1:#3a4270;--h2:#2a4a4e;--h3:#1e3a30;--glow:#ffd98a">
             <svg class="land-art" viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#land-scene" /><g class="mark"><rect x="206" y="52" width="12" height="40" style="fill:var(--h2)" stroke="#fff1d6" stroke-width="2" /><path d="M202 53 L212 38 L222 53 Z" style="fill:var(--h2)" stroke="#fff1d6" stroke-width="2" stroke-linejoin="round" /><rect x="209" y="58" width="6" height="7" style="fill:var(--glow)" /></g></svg>
+            <span class="land-chip" aria-hidden="true"><i></i>Open map</span>
             <div class="land-body">
               <small>Chapter I · Lv 1–6</small>
-              <h3>Sunpetal Meadow</h3>
+              <h3><button class="land-open" type="button" data-map="meadow" aria-label="Open the map of Sunpetal Meadow">Sunpetal Meadow</button></h3>
               <p>Flower fields, farms and villages around <b>Goldenhearth</b> and its fountain plaza. The Beacon stands dark on its hill.</p>
             </div>
           </article>
           <article class="land reveal" style="--s1:#0b1a20;--s2:#16393e;--s3:#4f7a5c;--h1:#244448;--h2:#1a3a36;--h3:#12302a;--glow:#b9f29d">
             <svg class="land-art" viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#land-scene" /><g class="mark"><path d="M212 40 v14" stroke="#fff1d6" stroke-width="2" /><path d="M204 54 h16 l-3 18 h-10 Z" style="fill:var(--h2)" stroke="#fff1d6" stroke-width="2" stroke-linejoin="round" /><circle cx="212" cy="63" r="4" style="fill:var(--glow)" /></g></svg>
+            <span class="land-chip" aria-hidden="true"><i></i>Open map</span>
             <div class="land-body">
               <small>Chapter II · Lv 7–12</small>
-              <h3>Whisperroot Woods</h3>
+              <h3><button class="land-open" type="button" data-map="woods" aria-label="Open the map of Whisperroot Woods">Whisperroot Woods</button></h3>
               <p>Lantern-lit paths under ancient roots, and the lanterns of <b>Lanternmarket</b>. Somewhere below, the Bell has gone silent.</p>
             </div>
           </article>
           <article class="land reveal" style="--s1:#0c0a22;--s2:#262054;--s3:#6a4bb0;--h1:#3a3470;--h2:#2a2658;--h3:#1c1a44;--glow:#c9b6ff">
             <svg class="land-art" viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#land-scene" /><g class="mark"><path d="M212 34 L216 46 L228 50 L216 54 L212 66 L208 54 L196 50 L208 46 Z" style="fill:var(--glow)" stroke="#fff1d6" stroke-width="2" stroke-linejoin="round" /></g></svg>
+            <span class="land-chip" aria-hidden="true"><i></i>Open map</span>
             <div class="land-body">
               <small>Chapter III · Lv 13–18</small>
-              <h3>Starfall Summit</h3>
+              <h3><button class="land-open" type="button" data-map="summit" aria-label="Open the map of Starfall Summit">Starfall Summit</button></h3>
               <p>Snowfields, frost runes and the high halls of <b>Skyhold</b>, below the crater where the Hollow Star came down.</p>
             </div>
           </article>
           <article class="land reveal" style="--s1:#1a0c14;--s2:#4e1e22;--s3:#c8602a;--h1:#5a3430;--h2:#40241f;--h3:#2c1814;--glow:#ffb347">
             <svg class="land-art" viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#land-scene" /><g class="mark"><path d="M190 90 L206 52 h12 L234 90 Z" style="fill:var(--h2)" stroke="#fff1d6" stroke-width="2" stroke-linejoin="round" /><path d="M206 52 q6 8 12 0" style="fill:var(--glow)" /><circle cx="210" cy="40" r="3" style="fill:var(--glow)" opacity=".8" /><circle cx="216" cy="30" r="2" style="fill:var(--glow)" opacity=".6" /></g></svg>
+            <span class="land-chip" aria-hidden="true"><i></i>Open map</span>
             <div class="land-body">
               <small>Chapter IV · Lv 19–24</small>
-              <h3>The Ember Wastes</h3>
+              <h3><button class="land-open" type="button" data-map="ember" aria-label="Open the map of The Ember Wastes">The Ember Wastes</button></h3>
               <p>An ash desert of lava lakes and a smoky red night, ruled from <b>Brasshaven</b>. The cold Dawn Forge waits at its heart.</p>
             </div>
           </article>
+        </div>
+        <div class="wrap valley-cta reveal">
+          <button class="btn ghost" type="button" data-map="all"><i class="map-glyph" aria-hidden="true"></i>Open the map of the whole valley</button>
         </div>
         <svg width="0" height="0" style="position:absolute" aria-hidden="true">
           <defs>
@@ -281,6 +283,20 @@
         <header><strong data-film-title>Mira</strong><button type="button" class="film-close" data-film-close aria-label="Close">✕</button></header>
         <video controls playsinline preload="none"></video>
         <footer><span>Every hero's adventure opens with their own film.</span><a class="btn primary" href="%site.gameUrl%" >Play now →</a></footer>
+      </div>
+    </dialog>
+
+    <dialog id="map" class="map-modal" aria-label="Map of the valley">
+      <div class="map-frame">
+        <header>
+          <div class="map-tabs" aria-label="Lands"></div>
+          <button type="button" class="film-close" data-map-close aria-label="Close the map">✕</button>
+        </header>
+        <div class="map-stage">
+          <canvas tabindex="0" aria-label="Map of the valley, fully explored. Drag to move, pinch or scroll to zoom, or use the arrow keys and plus and minus."></canvas>
+          <div class="map-zoom"><button type="button" data-zoom="1" aria-label="Zoom in">+</button><button type="button" data-zoom="-1" aria-label="Zoom out">−</button></div>
+        </div>
+        <footer class="map-legend"></footer>
       </div>
     </dialog>
 

@@ -28,8 +28,9 @@ All paths start from the path in `siteUrl` (for example `/Starfall.Grove.Landing
 ## The pages
 
 - `index.html`: the landing page.
-  - **Top section:** the paper diorama at night, with the logo, play and store buttons, and the five heroes standing together on the front hill.
+  - **Top section:** the paper diorama at night, with the logo, the play button and the intro film, the store links, and the five heroes standing together on the front hill.
   - **Main sections:** the story, the hero select, the four lands, features, platforms and FAQ.
+  - **The lands:** each card opens the map of that land, fully explored, as the game's map screen shows it. You can switch to another land or the whole valley, drag to pan and pinch or scroll to zoom.
   - **The hero select** copies the game's character screen. It has the rune pedestal (drag to turn the hero), traits, abilities, the roster, and each hero's story and guardians. It also has a legendary set to try on, and the hero's intro film.
 - `/privacy/`, `/terms/`, `/support/`, `/imprint/`: the legal and help pages the store listings need. Each is a React component in `src/legal/`. Every route is served from one shell, `legal.html`, which the build copies to `<route>/index.html` with that route's title and description (from `src/legal/routes.ts`). To add a page, add it to `routes.ts` and to the `pages` map in `src/legal/main.tsx`.
   - The privacy policy describes the game as it is: saves stay on the device, and there are no accounts, ads or analytics.
@@ -43,6 +44,12 @@ The heroes, pedestal, portraits and diorama are drawn by the game's own code, so
 npm run sync-art -- ../path/to/Starfall.Grove
 ```
 
+The map is baked from the game too. `npm run bake-maps` builds the valley with the game's world code in a headless browser (Playwright's Chromium; run `npx playwright install chromium` once). It paints the game's parchment map and writes one picture per land to `public/maps/`, plus the places and markers to `src/maps.json`. The landing page draws the names and markers over the pictures. Bake again after the game's world changes:
+
+```bash
+npm run bake-maps -- ../path/to/Starfall.Grove
+```
+
 ## Code
 
 ```text
@@ -50,13 +57,15 @@ index.html           The landing page
 legal.html           The shell of the legal and help routes
 landing.css          The whole site: the game's cardstock and parchment look, phones first
 site.json            Settings (above)
-public/              Icons and the link-preview image
-scripts/             sync-game-art.mjs
+public/              Icons, the link-preview image and the baked maps (maps/)
+scripts/             sync-game-art.mjs, bake-maps.mjs
 src/
   main.tsx           The landing page: diorama, cast, hero select, intro films
   lineup.ts          The five heroes on the front hill
   Select.tsx         The hero select section
   heroes.ts          Each hero's story, guardians, traits and land
+  worldMap.ts        The map modal: the baked lands with their names and markers, pan and zoom
+  maps.json          The places and markers on the map (from bake-maps)
   site-page.ts       What every page shares: fonts, styles, store badges, menu, reveals
   legal/             The legal and help pages: routes, the shared layout, one component per page
   game-art/          The copy of the game's art (above)
