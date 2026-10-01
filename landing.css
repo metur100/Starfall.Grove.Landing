@@ -108,23 +108,14 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
 .logo span { background: linear-gradient(100deg, #fff4d0 0%, #f5d27a 30%, #fff9e6 45%, #e8a14a 60%, #f5d27a 80%, #fff4d0 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 2px rgba(29, 21, 32, .9); paint-order: stroke fill; animation: shimmer 6s linear infinite, float 6s ease-in-out infinite; }
 .logo span:last-child { animation-delay: -.6s, -1.5s; font-size: .72em; letter-spacing: .12em; }
 .hero-tag { margin: 6px 0 6px; font: 900 clamp(17px, 2.3vw, 24px) var(--display); letter-spacing: .06em; color: var(--cream); text-shadow: 0 2px 0 rgba(18, 10, 20, .75), 0 0 18px rgba(18, 10, 20, .6); }
-/* One call to play, the film beside it, and the stores as a quiet line underneath. */
-.cta-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 28px; margin-top: 26px; }
-.watch { display: inline-flex; align-items: center; gap: 14px; padding: 4px 10px 4px 4px; border: 0; border-radius: 99px; background: none; cursor: pointer; color: var(--cream); font: 800 17px var(--ui); letter-spacing: .02em; text-shadow: 0 2px 0 rgba(18, 10, 20, .75), 0 0 14px rgba(18, 10, 20, .7); white-space: nowrap; }
-.watch-ring { position: relative; width: 60px; height: 60px; flex: none; border-radius: 50%; background-color: var(--glass); background-image: var(--grain-dark); border: 2px solid var(--edge); box-shadow: 0 0 0 1.5px var(--ink), var(--shadow); transition: transform .18s, border-color .18s; }
-.watch-ring::before { content: ''; position: absolute; left: 50%; top: 50%; margin: -9px 0 0 -5px; border: 9px solid transparent; border-left: 15px solid var(--gold); border-right: 0; filter: drop-shadow(0 0 6px rgba(245, 190, 90, .6)); }
-.watch-ring::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid rgba(242, 201, 106, .55); animation: ring 2.6s ease-out infinite; pointer-events: none; }
-.watch:hover .watch-ring { transform: scale(1.07); border-color: var(--gold); }
-.watch:hover { color: #fff; }
-.hero-stores { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 12px; margin-top: 30px; padding-top: 18px; border-top: 1.5px solid rgba(255, 236, 205, .18); }
-.hero-stores-label { font: 800 11px var(--ui); letter-spacing: .24em; text-transform: uppercase; color: var(--muted); text-shadow: 0 1px 0 rgba(18, 10, 20, .8); margin-right: 4px; }
-.store-chip { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px 0 11px; border-radius: 11px; background: rgba(13, 10, 15, .82); border: 1.5px solid rgba(255, 241, 214, .55); box-shadow: 0 0 0 1.5px var(--ink); color: #fff; text-decoration: none; font: 800 14px var(--ui); transition: transform .15s, border-color .15s; }
-.store-chip svg { width: 19px; height: 19px; flex: none; }
-.store-chip:hover { transform: translateY(-2px); color: #fff; border-color: var(--edge); }
-.store-chip.soon { cursor: default; }
-.store-chip.soon:hover { transform: none; }
-.store-chip.soon svg, .store-chip.soon span { opacity: .72; }
-.store-chip .badge-soon { top: -8px; right: -10px; padding: 0 6px; font-size: 9px; line-height: 14px; }
+/* The four calls sit on one even grid: play and the film on top, the two stores under them, every column the same width. */
+.hero-actions { width: min(640px, 100%); display: grid; gap: 14px; margin-top: 26px; }
+.cta-row, .stores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.cta-row .btn.big { width: 100%; padding: 0 20px; }
+.btn .short { display: none; }
+.stores .store-badge { justify-content: center; min-height: 64px; padding: 8px 16px; border-radius: 16px; }
+.stores .store-badge b { font-size: 21px; }
+.stores .store-badge svg { width: 32px; height: 32px; }
 .cast-wrap { position: absolute; left: 0; right: 0; bottom: var(--cast-lift); height: var(--cast-h); z-index: 1; }
 .cast-wrap canvas { width: 100%; height: 100%; touch-action: pan-y; opacity: 0; transform: translateY(16px); transition: opacity .8s .3s, transform .8s .3s; }
 .cast-in .cast-wrap canvas { opacity: 1; transform: none; }
@@ -139,28 +130,30 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
   :root { --cast-h: clamp(250px, 41svh, 380px); --cast-lift: clamp(12px, 4svh, 40px); }
   .eyebrow { font-size: 10.5px; letter-spacing: .2em; }
   .hero .eyebrow::before, .hero .eyebrow::after { display: none; }
-  .cta-row { flex-wrap: nowrap; gap: 12px; margin-top: 22px; }
+  .hero-actions, .cta-row, .stores { gap: 10px; }
+  .hero-actions { margin-top: 22px; }
   .cta-row .long { display: none; }
-  .watch { gap: 10px; padding-right: 2px; font-size: 15px; }
-  .watch-ring { width: 52px; height: 52px; }
-  .hero-stores { margin-top: 22px; padding-top: 14px; }
-  .hero-stores-label { width: 100%; margin: 0; }
+  .cta-row .short { display: inline; }
   .hero { padding-top: 72px; }
   .hero-copy { padding-top: clamp(4px, 3svh, 32px); }
   .cast-tags small { display: none; }
   .cast-tags button { padding: 2px 8px 3px; }
   .cast-tags b { font-size: 12px; }
-  .cta-row .btn.big { min-height: 58px; padding: 0 22px; font-size: 16px; }
+  .cta-row .btn.big { min-height: 58px; padding: 0 14px; gap: 10px; font-size: 17px; }
   .cta-row .btn.big b { font-size: 19px; }
   .store-badge { min-height: 52px; padding: 6px 14px 6px 11px; }
+  .stores .store-badge { min-height: 58px; padding: 6px 10px; gap: 10px; border-radius: 16px; }
+  .stores .store-badge b { font-size: 17px; }
+  .stores .store-badge svg { width: 25px; height: 25px; }
   .store-badge b { font-size: 17px; }
   .store-badge svg { width: 25px; height: 25px; }
 }
-@media (max-width: 420px) {
-  .cta-row .btn.big { padding: 0 18px; gap: 10px; }
-  .watch { flex-direction: column; gap: 4px; padding: 0; font-size: 12.5px; }
-  .watch-ring { width: 46px; height: 46px; }
-  .watch-ring::before { margin: -7px 0 0 -4px; border-width: 7px 0 7px 12px; }
+@media (max-width: 380px) {
+  .cta-row .btn.big { font-size: 15.5px; }
+  .stores .store-badge { gap: 8px; }
+  .stores .store-badge b { font-size: 15.5px; }
+  .stores .store-badge small { font-size: 10px; }
+  .stores .store-badge svg { width: 22px; height: 22px; }
 }
 
 /* ─────────── bands of the page */
@@ -429,7 +422,6 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fade-in { from { opacity: 0; } }
-@keyframes ring { 0% { transform: scale(.85); opacity: .9; } 80%, 100% { transform: scale(1.25); opacity: 0; } }
 @keyframes pop-in { from { opacity: 0; transform: scale(.96); } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
