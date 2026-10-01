@@ -28,7 +28,7 @@ All paths start from the path in `siteUrl` (for example `/Starfall.Grove.Landing
 ## The pages
 
 - `index.html`: the landing page.
-  - **Top section:** the paper diorama at night, with the logo, the play button and the intro film, the store links, and the five heroes standing together on the front hill.
+  - **Top section:** the paper diorama at night, with the logo, the play button, the intro film (`public/Intro.mp4`), the store links, and the five heroes standing together on the front hill.
   - **Main sections:** the story, the hero select, the four lands, features, platforms and FAQ.
   - **The lands:** each card opens the map of that land, fully explored, as the game's map screen shows it. You can switch to another land or the whole valley, drag to pan and pinch or scroll to zoom.
   - **The hero select** copies the game's character screen. It has the rune pedestal (drag to turn the hero), traits, abilities, the roster, and each hero's story and guardians. It also has a legendary set to try on, and the hero's intro film.
@@ -50,6 +50,10 @@ The map is baked from the game too. `npm run bake-maps` builds the valley with t
 npm run bake-maps -- ../path/to/Starfall.Grove
 ```
 
+## The intro film
+
+`public/Intro.mp4` is the website's own intro film, opened by **Watch the intro**. Its music and sound effects are written in `scripts/intro-score.js` for the film's five shots (the timings are listed at the top of that file), with the game's own instruments. `npm run score-intro` renders the score in a headless browser and puts it under the film, replacing its sound, and re-encodes a heavy picture once so it streams well on phones. It needs [ffmpeg](https://ffmpeg.org) on PATH, or its path in `FFMPEG`. If the film is re-cut, update the timings in the score and run it again.
+
 ## Code
 
 ```text
@@ -58,7 +62,7 @@ legal.html           The shell of the legal and help routes
 landing.css          The whole site: the game's cardstock and parchment look, phones first
 site.json            Settings (above)
 public/              Icons, the link-preview image and the baked maps (maps/)
-scripts/             sync-game-art.mjs, bake-maps.mjs
+scripts/             sync-game-art.mjs, bake-maps.mjs, intro-score.js and score-intro.mjs
 src/
   main.tsx           The landing page: diorama, cast, hero select, intro films
   lineup.ts          The five heroes on the front hill

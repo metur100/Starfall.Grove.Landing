@@ -55,13 +55,14 @@ if (castCanvas && tags) {
   } catch { castCanvas.remove(); }
 }
 
-// The intro films, in a paper frame over the page. They stream from the game's own copies (site.json gameUrl) and only load when opened.
+// The intro films, in a paper frame over the page; they only load when opened. 'valley' is the website's own film of the
+// whole story (public/Intro.mp4, scored by npm run score-intro); each hero's film streams from the game (site.json gameUrl).
 const film = document.getElementById('film') as HTMLDialogElement | null;
 const video = film?.querySelector('video');
-const openFilm = (id: HeroId) => {
+const openFilm = (id: HeroId | 'valley') => {
   if (!film || !video) return;
-  film.querySelector('[data-film-title]')!.textContent = `${HEROES[id].name}, ${HEROES[id].title}`;
-  video.src = `${site.gameUrl}intro/${id}.mp4`;
+  film.querySelector('[data-film-title]')!.textContent = id === 'valley' ? 'Starfall Grove' : `${HEROES[id].name}, ${HEROES[id].title}`;
+  video.src = id === 'valley' ? `${import.meta.env.BASE_URL}Intro.mp4` : `${site.gameUrl}intro/${id}.mp4`;
   film.showModal();
   video.play().catch(() => { /* the controls are there to start it */ });
 };
@@ -71,7 +72,7 @@ if (film && video) {
   film.addEventListener('click', e => { if (e.target === film) film.close(); });
   film.querySelector('[data-film-close]')?.addEventListener('click', () => film.close());
 }
-document.querySelectorAll<HTMLElement>('[data-film]').forEach(b => b.addEventListener('click', () => openFilm(b.dataset.film as HeroId)));
+document.querySelectorAll<HTMLElement>('[data-film]').forEach(b => b.addEventListener('click', () => openFilm(b.dataset.film as HeroId | 'valley')));
 
 // The hero select, drawn only while it is on screen.
 const selectEl = document.getElementById('select-root');
