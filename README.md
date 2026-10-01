@@ -11,7 +11,11 @@ npm run preview  # preview the build
 
 `dist/` is a static site. Every push to `master` builds it and publishes it to GitHub Pages (`.github/workflows/deploy.yml`). In the repository settings, set **Pages → Source** to **GitHub Actions** once.
 
-All paths start from the path in `siteUrl` (for example `/Starfall.Grove.Landing/`), so in development the site is at `http://localhost:5173/Starfall.Grove.Landing/`. If you move the site to a custom domain, change `siteUrl` and everything follows.
+The site lives at **https://starfallgrove.eu/**. All paths start from the path in `siteUrl`, so in development the site is at `http://localhost:5173/`. If the site moves again, change `siteUrl` and everything follows.
+
+### The domain
+
+`public/CNAME` names the domain, and in the repository settings **Pages → Custom domain** is set to `starfallgrove.eu` with **Enforce HTTPS** on. At the registrar the domain has four `A` records for `@` (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and a `CNAME` for `www` pointing to `metur100.github.io`. The game stays at its own address (`gameUrl`).
 
 ## Settings
 

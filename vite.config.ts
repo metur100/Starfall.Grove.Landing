@@ -50,7 +50,7 @@ const legalPages = (base: string): Plugin => {
   };
 };
 
-// Every path is built from the site's own address, so it works at a sub-path such as <user>.github.io/<repo>/.
+// Every path is built from the site's own address (site.json siteUrl), so it works at a domain root or at a sub-path.
 const base = new URL(readSite().siteUrl).pathname;
 
 export default defineConfig({
