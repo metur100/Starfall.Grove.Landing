@@ -3,7 +3,7 @@
 export const page = {
   "meta.description": "Starfall Grove is a pop-up paper storybook action RPG. Walk one vast valley of four lands, choose one of five heroes with a story of their own, and defeat the guardians and the Eclipse. Play in your browser, on Android and on iPhone and iPad.",
   "story.p2": "Then a star falls out of the sky, and the lights begin to go out. Master Orrin walks into the dark with his lantern and does not come back. Creatures stir in the tall grass, and a shadow older than the valley starts to wake.",
-  "world.text": "The valley is one continuous world, with no loading between lands, and every border is a journey of its own. Rebuild the bridge over the Gloomwater river to reach the Woods. Smash a path through the rockfall that buries Frostspine Pass, high in the snowy mountains, to climb to the Summit. Break open the caved-in mouth of the Cindermaw, a cave through a smoking volcano, to reach the Ember Wastes. Each land has its own light, weather, music, city and creatures found nowhere else.",
+  "world.text": "The valley is one continuous world, with no loading between lands, and every border is a journey of its own. Rebuild the long bridge across the Gloomwater, a river as wide as a mountain range, to reach the Woods. Smash a path through the rockfall that buries Frostspine Pass, high in the snowy mountains, to climb to the Summit. Break open the caved-in mouth of the Cindermaw, a cave through a smoking volcano, to reach the Ember Wastes. Each land has its own light, weather, music, city and creatures found nowhere else.",
   "story.p1": "Three lights keep the valley safe: the <b>Beacon</b> on the meadow hill, the <b>Bell</b> beneath the roots of the wood, and the <b>Star</b> above the summit. Nobody alive remembers why they were lit.",
   "heroes.text": "Every hero has their own level, bag, spells and main questline. You can drag them on the pedestal to turn them, tap an ability to see what it does, or try on a legendary set.",
   "story.p3": "Its name is <b>Umbra, the Eclipse</b>. It wears the shape of whatever you fear the most, so no two heroes meet the same guardians, and none of them walk the same road.",
@@ -14,7 +14,7 @@ export const page = {
   "faq.a4": "An up-to-date browser on a phone, tablet or computer, or the app from Google Play or the App Store. You can play with touch or with a keyboard.",
   "f.spells.p": "Every hero learns five abilities, from gravity wells to blizzards, and grows all the way to level 30. Each ability can be upgraded with up to five stars.",
   "world.woods": "A deep forest of giant oaks hung with moss, dark bogs full of lily pads, fairy rings that glow at night and the lanterns of <b>Lanternmarket</b>. Somewhere below, the Bell has gone silent. Shadewolves, webspinners and boglings hunt among the roots, and a wall of snowy peaks rises in the east.",
-  "world.meadow": "Rolling green country: wildflower meadows of lavender, poppies and buttercups, orchards heavy with fruit, hedgerows and beehives around the villages and <b>Goldenhearth</b>. The Beacon stands dark on its hill. Gloomlings, thornlings and bristleboars roam the grass, and the Gloomwater river cuts it off from the woods.",
+  "world.meadow": "Rolling green country: wildflower meadows of lavender, poppies and buttercups, orchards heavy with fruit, hedgerows and beehives around the villages and <b>Goldenhearth</b>. The Beacon stands dark on its hill. Gloomlings, thornlings and bristleboars roam the grass, and the broad Gloomwater, wooded islands standing in its current, cuts it off from the woods.",
   "world.ember": "An ash desert of volcanoes and lava lakes under a smoky red night: lava running down black slopes, obsidian spires, steaming fumaroles and old bones in the sand, ruled from <b>Brasshaven</b>. The cold Dawn Forge waits at its heart. Ember imps, ash scorpions and cinderhounds rule the sand.",
   "f.mounts.p": "Buy a pony, a stag, a frost wolf or a cinder drake from the stable master in any city, or win a boar or the starlit unicorn in battle. They're faster in the saddle and fun to show off.",
   "play.browser.p": "Play right now on any modern browser, on a phone, tablet or PC. You can also install it to your home screen like an app.",
@@ -30,7 +30,7 @@ export const page = {
   "faq.text": "Anything else? The <a href=\"support/\">support page</a> has more answers and a way to reach us.",
   "f.dice.p": "Villagers and innkeepers challenge you to Starfall Dice and the archery range between quests.",
   "f.secrets.p": "Cracked walls hide what a well-thrown bomb can open, and runestones tell the valley's lore.",
-  "f.ach.p": "Chapters, guardians, fallen stars, secrets and feats of combat, worth 1,140 points in six categories.",
+  "f.ach.p": "Chapters, guardians, fallen stars, secrets and feats of combat, worth 1,210 points in six categories.",
   "faq.a1": "No. There is no sign-up and no login. Your heroes are saved on your own device.",
   "f.films.p": "Each hero's adventure opens with its own animated film and an original score.",
   "hero.play": "Play <span class=\"long\">in your browser</span><span class=\"short\">now</span>",
@@ -86,7 +86,7 @@ export const page = {
   "badge.downloadOn": "Download on the",
   "cast.label": "Meet the heroes",
   "world.openMapOf": "Open the map of",
-  "f.ach.h": "60 achievements",
+  "f.ach.h": "64 achievements",
   "play.browser.h": "In your browser",
   "film.label": "Hero intro film",
   "light.forge": "The Dawn Forge",
@@ -132,6 +132,8 @@ export const page = {
   "f.sieges.p": "When the shadow strikes back, it comes for the houses: whole hordes pour out of the dark from every side and set the roofs alight. Drive them off before the town burns.",
   "f.depths.h": "The last light is not the end",
   "f.depths.p": "The old songs say the Dawn Forge was built over something, and lit so it would stay shut. Listen to the ground when the last guardian falls.",
+  "f.flight.h": "Griffon flights",
+  "f.flight.p": "Every city has a skymaster with a griffon. Climb into the saddle and fly high above the clouds, over the river and the mountains, to any city you have already reached on foot, in a few heartbeats.",
 };
 
 export type PageKey = keyof typeof page;
