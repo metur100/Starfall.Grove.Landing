@@ -43,16 +43,18 @@ const lands = w.regions.map(r => {
     image: c.toDataURL('image/webp', .86) };
 });
 const at = p => [Math.round(p.x), Math.round(p.y)];
+// Only the valley: the depths beneath the Dawn Forge are a surprise, and lie off the map anyway.
+const inValley = p => p.x >= 0 && p.x <= w.width;
 const markers = [];
 for (const o of w.objects) {
-  if (o.hiddenBy) continue;
+  if (o.hiddenBy || !inValley(o)) continue;
   const kind = { key: 'key', chest: 'chest', shrine: 'shrine', finale: 'finale', campfire: 'camp', fountain: 'fountain' }[o.kind];
   if (kind) markers.push([kind, ...at(o)]);
 }
 const SHOPS = new Set(['merchant', 'smith', 'armorer', 'inn']);
-for (const n of w.npcs) if (!n.hero && !n.after) markers.push([SHOPS.has(n.role) ? 'shop' : 'folk', ...at(n)]);
-for (const e of w.enemies) if (e.boss) markers.push(['boss', ...at(e)]); else if (e.heroic) markers.push(['heroic', ...at(e)]);
-window.__baked = { width: w.width, height: w.height, lands, pois: w.pois.map(p => ({ name: p.name, kind: p.kind, x: Math.round(p.x), y: Math.round(p.y) })), markers };
+for (const n of w.npcs) if (!n.hero && !n.after && inValley(n)) markers.push([SHOPS.has(n.role) ? 'shop' : 'folk', ...at(n)]);
+for (const e of w.enemies) if (!inValley(e)) continue; else if (e.boss) markers.push(['boss', ...at(e)]); else if (e.heroic) markers.push(['heroic', ...at(e)]);
+window.__baked = { width: w.width, height: w.height, lands, pois: w.pois.filter(inValley).map(p => ({ name: p.name, kind: p.kind, x: Math.round(p.x), y: Math.round(p.y) })), markers };
 `;
 const bakePage = {
   name: 'bake-page',
