@@ -409,6 +409,8 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
 .legal-page main { padding: 104px 0 72px; }
 .legal { width: min(860px, calc(100% - 32px)); margin: 0 auto; padding: clamp(26px, 5vw, 56px); }
 .legal h1 { margin: 6px 0 6px; font: 900 clamp(30px, 5vw, 46px)/1.08 var(--display); color: #7a3322; }
+.legal h1 { hyphens: auto; overflow-wrap: break-word; }
+.legal p, .legal li { overflow-wrap: break-word; }
 .legal .updated { margin: 0 0 26px; color: var(--paper-muted); font-size: 14px; }
 .legal h2 { margin: 30px 0 10px; font: 900 21px var(--display); color: var(--paper-ink); }
 .legal h3 { margin: 20px 0 6px; font: 900 17px var(--display); }

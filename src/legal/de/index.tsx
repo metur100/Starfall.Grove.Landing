@@ -1,5 +1,6 @@
 // Die Rechts- und Hilfeseiten auf Deutsch.
 import site from '../../../site.json';
+import MiniRiftPrivacy from './MiniRiftPrivacy';
 import { Address, Email, Publisher, route, updated } from '../Layout';
 
 const COUNTRY: Record<string, string> = { Germany: 'Deutschland', 'Bosnia and Herzegovina': 'Bosnien und Herzegowina' };
@@ -11,10 +12,10 @@ function Privacy() {
       <p className="updated">Stand: {updated()}</p>
 
       <div className="summary">
-        <p><strong>Kurz gesagt:</strong> Starfall Grove, das Story-Spiel, erhebt keine personenbezogenen Daten. Ihr Spielstand wird nur auf Ihrem eigenen Gerät gespeichert, und wir erhalten ihn nie. <b>Mini Rift</b>, unser Online-Kampfspiel, hat Konten: Wir speichern Ihren Benutzernamen, Ihre E-Mail-Adresse, einen Hash Ihres Passworts, Ihren Spielfortschritt, Ihre Freunde und Match-Ergebnisse auf unserem Server. Chat wird weitergegeben, nicht gespeichert. Keines der Spiele hat Werbung, Analyse oder Tracking, und Sie können Ihr Mini-Rift-Konto jederzeit löschen.</p>
+        <p><strong>Kurz gesagt:</strong> Starfall Grove erhebt keine personenbezogenen Daten. Ihr Spielstand wird nur auf Ihrem eigenen Gerät gespeichert, und wir erhalten ihn nie. Es gibt keine Konten, keine Werbung, keine Analyse und kein Tracking. Unser Online-Kampfspiel <b>Mini Rift</b> funktioniert anders und hat <a href={route('minirift/privacy')}>eine eigene Datenschutzerklärung</a>.</p>
       </div>
 
-      <p>Diese Erklärung beschreibt, was mit Ihren Daten geschieht, wenn Sie <b>Starfall Grove</b> oder <b>Mini Rift</b> spielen, ob im Webbrowser, als Android-App von Google Play oder als iOS-App aus dem App Store, und wenn Sie diese Website besuchen. Zusammen heißt das im Folgenden „die Spiele“.</p>
+      <p>Diese Erklärung beschreibt, was mit Ihren Daten geschieht, wenn Sie <b>Starfall Grove</b>, das Bilderbuch-Abenteuer, spielen, ob im Webbrowser, als Android-App von Google Play oder als iOS-App aus dem App Store, und wenn Sie diese Website besuchen. Für <b>Mini Rift</b>, unser Online-Kampfspiel mit Konten, gilt die <a href={route('minirift/privacy')}>Datenschutzerklärung von Mini Rift</a>.</p>
 
       <h2>1. Verantwortlicher</h2>
       <p>Die Spiele werden entwickelt und herausgegeben von:</p>
@@ -36,44 +37,27 @@ function Privacy() {
       <h2>4. Sicherungen, die Sie selbst anlegen</h2>
       <p>In den Einstellungen von Starfall Grove können Sie eine Sicherungsdatei Ihrer Spielstände <b>exportieren</b> oder <b>importieren</b>. Die Datei wird auf Ihrem Gerät erstellt und auf Ihrem Gerät gelesen. Sie landet dort, wo Sie sie ablegen, und wird nie an uns gesendet.</p>
 
-      <h2>5. Mini Rift (Online-Kämpfe)</h2>
-      <p>Mini Rift wird über das Internet mit anderen Menschen gespielt und braucht deshalb, anders als Starfall Grove, Konten und einen Server. Dort wird Folgendes gespeichert:</p>
-      <ul>
-        <li><b>Ihr Konto</b>: der Benutzername und die E-Mail-Adresse, mit denen Sie sich registrieren, und Ihr Passwort, nur als gesalzener Hash gespeichert (wir können es nicht lesen). Die E-Mail-Adresse nutzen wir für Links zum Zurücksetzen des Passworts und um Ihnen zu antworten, wenn Sie uns schreiben. Wir versenden keine Newsletter.</li>
-        <li><b>Ihre Anmeldungen</b>: Jedes Gerät, auf dem Sie sich anmelden, erhält einen zufälligen Anmeldeschlüssel; unser Server speichert nur eine verschlüsselte (gehashte) Form davon, damit Sie angemeldet bleiben. Abmelden vergisst ihn; das Zurücksetzen des Passworts meldet alle anderen Geräte ab.</li>
-        <li><b>Ihr Spielprofil</b>: Ihre Münzen, Spielerstufe und Erfahrung, die Helden und Skins, die Sie besitzen und tragen, Ihr Talisman, Ihre Wertungen und Ränge, Ihre Summen an Spielen, Siegen, Kills, Toden und Assists und Ihre letzten zwölf Matches.</li>
-        <li><b>Freunde</b>: Ihre Freundesliste, Freundschaftsanfragen und die Spieler, die Sie blockiert haben.</li>
-        <li><b>Chat</b>: Nachrichten, die Sie in Räumen, Matches oder an einen Freund schreiben, werden in Echtzeit an die anderen Spieler weitergegeben und <b>nicht gespeichert</b>. Nur wenn ein Spieler eine Nachricht meldet, bewahren wir diese Nachricht mit der Meldung auf (meldender und gemeldeter Spieler, Grund und Zeitpunkt), um sie zu prüfen.</li>
-        <li><b>Match-Aufzeichnungen</b>: für jedes beendete Match Raumcode, Modus, Karte, Gewinner und Dauer, und für jeden Spieler darin Name, Held, Team und Match-Statistik.</li>
-        <li><b>Verbindungsdaten</b>: Solange Sie verbunden sind, verarbeitet der Server Ihre IP-Adresse und was Sie in einem Match tun. Wir nutzen das nur, um das Spiel zu betreiben, und speichern es nicht. Der Hosting-Anbieter kann aus Sicherheitsgründen technische Protokolle führen.</li>
-      </ul>
-      <p>Andere Spieler sehen Ihren Benutzernamen, Helden, Skin, Ihre Stufe, Ihren Rang, Ihre Match-Statistik, Ihren Online-Status (nur Freunde) und was Sie im Chat schreiben. Bitte verwenden Sie nicht Ihren echten Namen oder etwas Persönliches als Benutzernamen. Benutzernamen mit Beleidigungen werden abgelehnt, grobe Wörter im Chat werden ausgeblendet. Sie können jeden Spieler blockieren und melden.</p>
-      <p><b>Wozu:</b> um Ihnen das Spiel bereitzustellen, für das Sie sich registriert haben, einschließlich Konto, Matchmaking, Freunden, Chat, Ihrem Fortschritt und der Rangliste (Art. 6 Abs. 1 lit. b DSGVO), und um das Spiel sicher und fair zu halten, einschließlich der Prüfung von Meldungen (Art. 6 Abs. 1 lit. f DSGVO).</p>
-      <p><b>Wie lange:</b> Ihr Konto bleibt bestehen, bis Sie es löschen. Auf der Profilseite von Mini Rift entfernt <b>Delete my profile</b> Ihr Konto, Profil und Ihre Freundesliste sofort von unserem Server; Sie können uns auch per E-Mail darum bitten. Meldungen bewahren wir bis zu 12 Monate auf. Match-Aufzeichnungen bleiben für Spielverlauf und Statistik erhalten; wenn Ihr Name auch daraus entfernt werden soll, schreiben Sie uns.</p>
-      <p><b>Wo:</b> Der Mini-Rift-Server und seine Datenbank werden für uns vom Hosting-Anbieter <b>MonsterASP.NET</b> betrieben, und E-Mails zum Zurücksetzen des Passworts werden über <b>Googles Gmail</b> versendet, das sie nur zur Zustellung verarbeitet. Die Browser-Version von Mini Rift wird über GitHub Pages ausgeliefert (Abschnitt 6).</p>
-      <p>Mini Rift hat keine Werbung, keine Analyse und keine Käufe: Münzen gibt es nur durchs Spielen.</p>
-
-      <h2>6. Hosting der Website und der Browser-Versionen</h2>
+      <h2>5. Hosting der Website und der Browser-Versionen</h2>
       <p>Diese Website und die Browser-Versionen der Spiele werden bei <b>GitHub Pages</b> gehostet, einem Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Wenn Sie eine Seite aufrufen, verbindet sich Ihr Browser mit den Servern von GitHub. Damit das funktioniert, und aus Sicherheitsgründen, verarbeitet GitHub technische Verbindungsdaten wie Ihre IP-Adresse, Datum und Uhrzeit, die angefragte Datei und Ihren Browsertyp und speichert diese gegebenenfalls in Server-Logs. Wir haben keinen Zugriff auf diese Logs. GitHub kann diese Daten in den USA verarbeiten. Einzelheiten finden Sie im <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
       <p>Rechtsgrundlage ist unser berechtigtes Interesse, die Spiele und diese Website zuverlässig und sicher bereitzustellen (Art. 6 Abs. 1 lit. f DSGVO). Die Schriftarten werden zusammen mit den Spielen vom selben Ort ausgeliefert, es geht also keine Anfrage an Google Fonts oder andere Dritte.</p>
 
-      <h2>7. App-Stores</h2>
+      <h2>6. App-Stores</h2>
       <p>Wenn Sie ein Spiel bei <b>Google Play</b> oder im <b>Apple App Store</b> herunterladen, werden der Download und Ihr Store-Konto von Google bzw. Apple nach deren eigenen Datenschutzbestimmungen abgewickelt. Die Stores können Entwicklern anonyme, zusammengefasste Statistiken wie die Zahl der Installationen zur Verfügung stellen, oder Absturzberichte, wenn Sie dies in Ihren Geräteeinstellungen erlaubt haben. Daraus können wir nicht erkennen, wer Sie sind.</p>
       <ul>
         <li>Google: <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
         <li>Apple: <a href="https://www.apple.com/legal/privacy/" rel="noopener">apple.com/legal/privacy</a></li>
       </ul>
 
-      <h2>8. Kinder</h2>
-      <p>Starfall Grove erhebt von niemandem personenbezogene Daten, also auch nicht von Kindern. Mini Rift hat einen Chat mit anderen Spielern und ist für Spieler ab 13 Jahren gedacht. Kinder sollten sich nicht registrieren; hat ein Kind unter 13 ein Konto angelegt, können Eltern es auf der Profilseite löschen oder uns per E-Mail darum bitten, und wir löschen es.</p>
+      <h2>7. Kinder</h2>
+      <p>Starfall Grove erhebt von niemandem personenbezogene Daten, also auch nicht von Kindern. Es hat keinen Chat und keinen Kontakt zu anderen Spielern.</p>
 
-      <h2>9. Ihre Rechte</h2>
-      <p>Nach der DSGVO haben Sie das Recht auf Auskunft über Ihre personenbezogenen Daten sowie auf Berichtigung und Löschung. Sie können außerdem die Einschränkung der Verarbeitung verlangen, ihr widersprechen, Ihre Daten in einem übertragbaren Format erhalten und sich bei einer Datenschutz-Aufsichtsbehörde beschweren. Für Starfall Grove haben wir keine Daten über Sie. Ihr Mini-Rift-Profil sehen Sie auf dessen Profilseite und können es dort löschen; für alles Weitere schreiben Sie uns von der E-Mail-Adresse Ihres Kontos und nennen Ihren Benutzernamen.</p>
+      <h2>8. Ihre Rechte</h2>
+      <p>Nach der DSGVO haben Sie das Recht auf Auskunft über Ihre personenbezogenen Daten sowie auf Berichtigung und Löschung. Sie können außerdem die Einschränkung der Verarbeitung verlangen, ihr widersprechen, Ihre Daten in einem übertragbaren Format erhalten und sich bei einer Datenschutz-Aufsichtsbehörde beschweren. Für Starfall Grove haben wir keine Daten über Sie; Ihre Spielstände liegen auf Ihrem Gerät, und Sie können sie dort löschen.</p>
 
-      <h2>10. Änderungen dieser Erklärung</h2>
+      <h2>9. Änderungen dieser Erklärung</h2>
       <p>Falls die Spiele anders mit Daten umgehen, passen wir diese Erklärung an, bevor die Änderung in Kraft tritt, und aktualisieren das Datum oben.</p>
 
-      <h2>11. Kontakt</h2>
+      <h2>10. Kontakt</h2>
       <p>Bei Fragen zum Datenschutz schreiben Sie an <Email />.</p>
     </>
   );
@@ -193,4 +177,4 @@ function Imprint() {
   );
 }
 
-export const pages = { privacy: Privacy, terms: Terms, support: Support, imprint: Imprint };
+export const pages = { privacy: Privacy, 'minirift/privacy': MiniRiftPrivacy, terms: Terms, support: Support, imprint: Imprint };

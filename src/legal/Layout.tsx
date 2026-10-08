@@ -16,8 +16,18 @@ export const Email = ({ subject }: { subject?: string }) => (
   <a href={`mailto:${site.email}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`}>{site.email}</a>
 );
 
-/** The date the legal pages last changed (site.json `updated`, as YYYY-MM-DD), written the way this language writes dates. */
-export const updated = () => new Date(`${site.updated}T12:00:00`).toLocaleDateString(LOCALE === 'en' ? 'en-GB' : LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
+const MONTHS: Record<string, string[]> = {
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+  bs: ['januar', 'februar', 'mart', 'april', 'maj', 'juni', 'juli', 'august', 'septembar', 'oktobar', 'novembar', 'decembar'],
+};
+/** The date the legal pages last changed (site.json `updated`, as YYYY-MM-DD), written the way this language writes
+ *  dates. Spelled out here rather than with toLocaleDateString: browsers without Bosnian would write it differently
+ *  from the build, and the page would no longer match what was prerendered. */
+export const updated = () => {
+  const [y, m, d] = site.updated.split('-').map(Number), month = (MONTHS[LOCALE] ?? MONTHS.en)[m - 1];
+  return LOCALE === 'en' ? `${d} ${month} ${y}` : `${d}. ${month} ${y}.`.replace(/.$/, LOCALE === 'de' ? '' : '.');
+};
 
 /** The publisher's name and email. */
 export const Publisher = () => (
@@ -73,7 +83,7 @@ export function Layout({ slug, children }: { slug: LegalSlug; children: ReactNod
 
       <main id="content">
         <article className="legal page">
-          <small className="page-eyebrow">Starfall Grove</small>
+          <small className="page-eyebrow">{slug.startsWith('minirift') ? 'Mini Rift' : 'Starfall Grove'}</small>
           <h1>{routes[slug].title}</h1>
           {children}
         </article>
