@@ -201,7 +201,7 @@ export const page: Record<PageKey, string> = {
   "mr.next": "Nächster Screenshot",
   "mr.grow.eyebrow": "Spielen, verdienen, freischalten",
   "mr.grow.title": "Jedes Match bringt dich weiter",
-  "mr.grow.text": "Du startest mit drei Helden und etwas Münzen. Jedes Match zahlt: mehr für einen Sieg, weniger für eine Niederlage, und einen Bonus für deinen ersten Sieg des Tages. Mit echtem Geld kann man nichts kaufen.",
+  "mr.grow.text": "Du startest mit Mira und etwas Münzen, und jede Woche sind zwei weitere Helden kostenlos spielbar. Jedes Match zahlt: mehr für einen Sieg, weniger für eine Niederlage, und einen Bonus für deinen ersten Sieg des Tages. Mit echtem Geld kann man nichts kaufen.",
   "mr.grow.l1": "<b>Münzen</b> schalten Lyra, Elara und Riven frei, und jede Woche ist ein Held kostenlos",
   "mr.grow.l2": "<b>Achtzehn Skins</b>: selten, episch und legendär mit Aura und Leuchtspur",
   "mr.grow.l3": "<b>Ränge</b> von Seedling bis Celestial, für Schlachten und für Duelle",

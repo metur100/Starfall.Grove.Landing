@@ -200,7 +200,7 @@ export const page = {
   "mr.next": "Next screenshot",
   "mr.grow.eyebrow": "Play, earn, unlock",
   "mr.grow.title": "Every match moves you forward",
-  "mr.grow.text": "You start with three heroes and some coins. Every match pays: more for a win, less for a loss, and a bonus for your first win of the day. There is nothing to buy with real money.",
+  "mr.grow.text": "You start with Mira and some coins, and two more heroes are free to play every week. Every match pays: more for a win, less for a loss, and a bonus for your first win of the day. There is nothing to buy with real money.",
   "mr.grow.l1": "<b>Coins</b> unlock Lyra, Elara and Riven, and one hero is free every week",
   "mr.grow.l2": "<b>Eighteen skins</b>: rare, epic, and legendary ones with an aura and a trail",
   "mr.grow.l3": "<b>Ranks</b> from Seedling to Celestial, for battles and for duels",

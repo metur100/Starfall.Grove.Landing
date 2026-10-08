@@ -201,7 +201,7 @@ export const page: Record<PageKey, string> = {
   "mr.next": "Sljedeća slika",
   "mr.grow.eyebrow": "Igraj, zaradi, otključaj",
   "mr.grow.title": "Svaki meč te gura naprijed",
-  "mr.grow.text": "Počinješ s tri junaka i nešto novčića. Svaki meč plaća: više za pobjedu, manje za poraz, i bonus za prvu pobjedu u danu. Ništa se ne kupuje pravim novcem.",
+  "mr.grow.text": "Počinješ s Mirom i nešto novčića, a svake sedmice dva druga junaka možeš igrati besplatno. Svaki meč plaća: više za pobjedu, manje za poraz, i bonus za prvu pobjedu u danu. Ništa se ne kupuje pravim novcem.",
   "mr.grow.l1": "<b>Novčići</b> otključavaju Lyru, Elaru i Rivena, a jedan junak je besplatan svake sedmice",
   "mr.grow.l2": "<b>Osamnaest skinova</b>: rijetki, epski i legendarni s aurom i tragom",
   "mr.grow.l3": "<b>Rangovi</b> od Seedling do Celestial, za bitke i za duele",
