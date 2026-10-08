@@ -11,7 +11,7 @@ export default function MiniRiftPrivacy() {
         <p><strong>Kurz gesagt:</strong> Mini Rift ist ein Online-Spiel und braucht deshalb ein Konto und einen Server. Wir speichern Ihren Benutzernamen, Ihre E-Mail-Adresse, einen Hash Ihres Passworts, Ihren Spielfortschritt, Ihre Freunde und Ihre Match-Ergebnisse. Chat wird an andere Spieler weitergegeben und nicht gespeichert, außer jemand meldet eine Nachricht. Wir senden Ihnen nur die E-Mails, die das Spiel braucht (Willkommen und Bestätigung, Passwort zurücksetzen). Es gibt keine Werbung, keine Analyse, kein Tracking und keine Käufe, und Sie können Ihr Konto jederzeit auf der Profilseite löschen.</p>
       </div>
 
-      <p>Diese Erklärung gilt für <b>Mini Rift</b>, unser 3-gegen-3-Online-Kampfspiel, ob Sie es im Webbrowser, als Android-App von Google Play oder als iOS-App aus dem App Store spielen. Unser Story-Spiel Starfall Grove erhebt überhaupt keine personenbezogenen Daten und hat <a href={route('privacy')}>eine eigene Datenschutzerklärung</a>.</p>
+      <p>Diese Erklärung gilt für <b>Mini Rift</b>, das 3-gegen-3-Online-Kampfspiel von <b>{site.studio}</b>, ob Sie es im Webbrowser, als Android-App von Google Play oder als iOS-App aus dem App Store spielen. Unser Story-Spiel Starfall Grove erhebt überhaupt keine personenbezogenen Daten und hat <a href={route('privacy')}>eine eigene Datenschutzerklärung</a>.</p>
 
       <h2>1. Verantwortlicher</h2>
       <p>Mini Rift wird entwickelt und herausgegeben von:</p>
@@ -63,31 +63,34 @@ export default function MiniRiftPrivacy() {
       <h2>10. Verbindungsdaten und wo Ihre Daten liegen</h2>
       <p>Solange Sie verbunden sind, verarbeitet der Server Ihre IP-Adresse und was Sie in einem Match tun, nur um das Spiel zu betreiben; er speichert sie nicht. Der Mini-Rift-Server und seine Datenbank werden für uns vom Hosting-Anbieter <b>MonsterASP.NET</b> betrieben, der aus Sicherheitsgründen technische Protokolle führen kann. Die Dateien des Spiels (die Browser-Version) werden über <b>GitHub Pages</b> ausgeliefert, einen Dienst der GitHub, Inc., USA, der dafür Verbindungsdaten wie Ihre IP-Adresse verarbeitet (siehe <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>). Google und GitHub können Daten in den USA verarbeiten; beide sind nach dem EU-U.S. Data Privacy Framework zertifiziert.</p>
 
-      <h2>11. Wozu wir Ihre Daten verarbeiten</h2>
+      <h2>11. Wie wir Ihre Daten schützen</h2>
+      <p>Jede Verbindung zwischen dem Spiel und unserem Server ist verschlüsselt (HTTPS und sichere WebSockets, TLS). Passwörter, Anmeldeschlüssel und die Codes in unseren E-Mails werden nur als Hashes gespeichert, nie lesbar. Nur wir haben Zugriff auf den Server und seine Datenbank, über den geschützten Zugang des Hosting-Anbieters. Chat wird nie in die Datenbank geschrieben, außer eine Nachricht wird gemeldet.</p>
+
+      <h2>12. Wozu wir Ihre Daten verarbeiten</h2>
       <ul>
         <li>Um Ihnen das Spiel bereitzustellen, für das Sie sich registriert haben: Ihr Konto, die Anmeldung, Ihren Fortschritt, Matchmaking, Freunde, Chat, die Rangliste und die dafür nötigen E-Mails (Art. 6 Abs. 1 lit. b DSGVO).</li>
         <li>Um das Spiel sicher und fair zu halten: gehashte Passwörter, begrenzte Anmeldeversuche, ausgeblendete grobe Wörter, die Prüfung von Meldungen und Match-Aufzeichnungen zum Ausbalancieren (unser berechtigtes Interesse, Art. 6 Abs. 1 lit. f DSGVO).</li>
       </ul>
 
-      <h2>12. Wie lange wir sie speichern</h2>
+      <h2>13. Wie lange wir sie speichern</h2>
       <p>Ihr Konto und Profil bleiben bestehen, bis Sie sie löschen. Auf der Profilseite entfernt <b>Delete my profile</b> Ihr Konto, Profil, Ihre Freundesliste und Anmeldungen sofort von unserem Server; Sie können uns auch per E-Mail darum bitten. Meldungen bewahren wir bis zu 12 Monate auf. Match-Aufzeichnungen bleiben für Spielverlauf und Statistik erhalten; wenn Ihr Name auch daraus entfernt werden soll, schreiben Sie uns.</p>
 
-      <h2>13. Was Mini Rift nicht tut</h2>
+      <h2>14. Was Mini Rift nicht tut</h2>
       <p>Mini Rift zeigt keine Werbung, enthält keine Analyse- oder Tracking-Werkzeuge und keine Social-Media-Plugins und verkauft nichts: Münzen gibt es nur durchs Spielen. Es fragt nie nach Ihrem Standort, Ihren Kontakten, Fotos, Ihrer Kamera oder Ihrem Mikrofon, und wir verkaufen Ihre Daten nicht und geben sie niemandem für dessen eigene Zwecke weiter.</p>
 
-      <h2>14. App-Stores</h2>
+      <h2>15. App-Stores</h2>
       <p>Wenn Sie Mini Rift bei <b>Google Play</b> oder im <b>Apple App Store</b> herunterladen, werden der Download und Ihr Store-Konto von Google bzw. Apple nach deren eigenen Datenschutzbestimmungen abgewickelt (<a href="https://policies.google.com/privacy" rel="noopener">Google</a>, <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple</a>). Die Stores können uns anonyme, zusammengefasste Statistiken wie die Zahl der Installationen geben, oder Absturzberichte, wenn Sie das auf Ihrem Gerät erlaubt haben. Daraus können wir nicht erkennen, wer Sie sind.</p>
 
-      <h2>15. Kinder</h2>
+      <h2>16. Kinder</h2>
       <p>Mini Rift hat einen Chat mit anderen Spielern und ist für Spieler ab 13 Jahren gedacht. Kinder unter 13 sollten sich nicht registrieren. Hat ein Kind unter 13 ein Konto angelegt, können Eltern es auf der Profilseite löschen oder uns per E-Mail darum bitten, und wir löschen es.</p>
 
-      <h2>16. Ihre Rechte</h2>
+      <h2>17. Ihre Rechte</h2>
       <p>Nach der DSGVO haben Sie das Recht auf Auskunft über Ihre personenbezogenen Daten sowie auf Berichtigung und Löschung. Sie können außerdem die Einschränkung der Verarbeitung verlangen, ihr widersprechen, Ihre Daten in einem übertragbaren Format erhalten und sich bei einer Datenschutz-Aufsichtsbehörde beschweren. Ihr Profil sehen Sie auf der Profilseite von Mini Rift, wo Sie auch Ihren Benutzernamen ändern und Ihr Konto löschen können. Für alles Weitere schreiben Sie uns von der E-Mail-Adresse Ihres Kontos und nennen Ihren Benutzernamen.</p>
 
-      <h2>17. Änderungen dieser Erklärung</h2>
+      <h2>18. Änderungen dieser Erklärung</h2>
       <p>Falls Mini Rift anders mit Daten umgeht, passen wir diese Erklärung an, bevor die Änderung in Kraft tritt, und aktualisieren das Datum oben.</p>
 
-      <h2>18. Kontakt</h2>
+      <h2>19. Kontakt</h2>
       <p>Bei Fragen zum Datenschutz in Mini Rift schreiben Sie an <Email subject="Mini Rift Datenschutz" />. Mini Rift im Browser: <a href={site.mobaUrl} rel="noopener">{site.mobaUrl.replace(/^https:\/\//, '')}</a>.</p>
     </>
   );

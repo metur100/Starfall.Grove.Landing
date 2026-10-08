@@ -31,7 +31,7 @@ export const updated = () => {
 
 /** The publisher's name and email. */
 export const Publisher = () => (
-  <address className="contact-card"><strong>{site.developer}</strong><br />{ui.legal.email}: <Email /></address>
+  <address className="contact-card"><strong>{site.studio}</strong><br />{site.developer}<br />{ui.legal.email}: <Email /></address>
 );
 
 /** The publisher's postal address card (site.json). Lines left empty there are left out. */
@@ -39,7 +39,7 @@ export const Address = ({ email, country }: { email?: boolean; country?: string 
   const lines = [site.addressLine1, site.addressLine2, country ?? site.country].filter(Boolean);
   return (
     <address className="contact-card">
-      <strong>{site.developer}</strong>
+      <strong>{site.studio}</strong><br />{site.developer}
       {lines.map(l => <span key={l}><br />{l}</span>)}
       {email && <><br />{ui.legal.email}: <Email /></>}
     </address>
@@ -97,7 +97,7 @@ export function Layout({ slug, children }: { slug: LegalSlug; children: ReactNod
               <a key={s} href={route(s)} aria-current={s === slug ? 'page' : undefined}>{routes[s].title}</a>
             ))}
           </nav>
-          <p className="foot-copy">© {new Date().getFullYear()} {site.developer}. {t.rights}</p>
+          <p className="foot-copy">© {new Date().getFullYear()} {site.studio} ({site.developer}). {t.rights}</p>
         </div>
       </footer>
     </>
