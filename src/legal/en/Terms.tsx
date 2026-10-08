@@ -16,12 +16,14 @@ export default function Terms() {
 
       <h2>3. Your saves</h2>
       <p>Your progress is saved only on your own device. If you clear your browser's data, reset or lose your device, or uninstall the app, your progress can be lost. We cannot restore it, because we never receive a copy. Use Settings → <b>Back up your saves</b> to keep your own backup.</p>
+      <p><b>Mini Rift</b>, our online battle game, keeps your profile on our server instead (see the privacy policy). Its coins, heroes, skins and ranks are virtual items you earn by playing. They can't be bought, sold or exchanged for money and have no value outside the game. We may change prices, rewards and game balance, and we may reset or delete profiles that cheat or abuse the game. You can delete your own profile at any time from its Profile page.</p>
 
       <h2>4. App stores</h2>
       <p>If you get the game from Google Play or the Apple App Store, the store's own terms also apply to the download and to any purchase, including refunds. For the iOS app, Apple's <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Standard Licensed Application End User License Agreement</a> applies as well. Apple is not responsible for the game or for support of it.</p>
 
       <h2>5. Fair play</h2>
       <p>Please don't attack, overload or try to disrupt the servers that host the game. Please don't use the game to break any law either.</p>
+      <p>In Mini Rift, please play fair: no cheats, scripts, exploits or deliberately leaving matches, and no usernames or chat messages that insult, impersonate or harass others. We may suspend or delete accounts that do.</p>
 
       <h2>6. Changes and availability</h2>
       <p>We keep improving the game, and updates can change or remove content. We try to keep the game available, but we can't promise that it will always be reachable, free of errors or compatible with every device.</p>

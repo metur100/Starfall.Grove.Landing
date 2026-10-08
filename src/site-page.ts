@@ -9,10 +9,11 @@ import '@fontsource/nunito/latin-800.css';
 import '@fontsource/nunito/latin-900.css';
 import '../landing.css';
 import site from '../site.json';
+import { setupFx } from './fx';
 
 export function setupPage() {
   // Store badges: a link once the store page exists, "Coming soon" until then (the links live in landing/site.json).
-  const stores: Record<string, string> = { play: site.playStoreUrl, apple: site.appStoreUrl };
+  const stores: Record<string, string> = { play: site.playStoreUrl, apple: site.appStoreUrl, 'mr-play': site.miniriftPlayStoreUrl, 'mr-apple': site.miniriftAppStoreUrl };
   document.querySelectorAll<HTMLAnchorElement>('a[data-store]').forEach(a => {
     const url = stores[a.dataset.store!];
     if (url) { a.href = url; a.classList.remove('soon'); a.querySelector('.badge-soon')?.remove(); }
@@ -37,4 +38,5 @@ export function setupPage() {
   } else items.forEach(el => el.classList.add('in'));
 
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
+  setupFx();
 }

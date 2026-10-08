@@ -36,7 +36,15 @@ export default function Support() {
         <li><b>Browser:</b> clear the site data (cookies and site data, or storage) for the game's address in your browser settings.</li>
         <li><b>Android and iOS:</b> uninstall the app. This removes all of its data.</li>
       </ul>
-      <p>We hold no data about you, so there is nothing to delete on our side. You can read the details in our <a href={route('privacy')}>privacy policy</a>.</p>
+      <p>For Starfall Grove we hold no data about you, so there is nothing to delete on our side. You can read the details in our <a href={route('privacy')}>privacy policy</a>.</p>
+
+      <h2 id="mini-rift">Mini Rift</h2>
+      <h3 id="delete-profile">How do I delete my Mini Rift profile?</h3>
+      <p>In Mini Rift, open <b>Profile</b> and tap <b>Delete my profile</b>, then tap again to confirm. Your account, with its username, email, coins, heroes, skins, ranks, friends and match history, is removed from our server at once. If you can't log in any more, email us from your account's address with your username; we delete it within 30 days. Uninstalling the app or clearing the browser data does <b>not</b> delete the account, it only signs that device out.</p>
+      <h3>How do I play with my profile on another device?</h3>
+      <p>Log in on the other device with your username and password (<b>Log in</b>). All your progress is there. Forgot your password? Tap <b>Forgot password?</b>, enter your email and open the link in the email; it works for one hour.</p>
+      <h3>How do I report a player?</h3>
+      <p>Tap the player's name in a chat (or the "…" next to a friend) and choose <b>Report</b> with a reason. <b>Block</b> stops their messages and requests reaching you. We review every report and remove names or delete accounts when needed. You can also email us.</p>
     </>
   );
 }

@@ -45,9 +45,9 @@ The site is in English (at the root), German (`/de/`) and Bosnian (`/bs/`). Ever
   - **Main sections:** the story, the hero select, the four lands, features, platforms and FAQ.
   - **The lands:** each card opens the map of that land, fully explored, as the game's map screen shows it. You can switch to another land or the whole valley, drag to pan and pinch or scroll to zoom.
   - **The hero select** copies the game's character screen. It has the rune pedestal (drag to turn the hero), traits, abilities, the roster, and each hero's story and guardians. It also has a legendary set to try on, and the hero's intro film.
-- `/privacy/`, `/terms/`, `/support/`, `/imprint/` (and the same under `/de/` and `/bs/`): the legal and help pages the store listings need. Each language's pages are React components in `src/legal/<lang>/`. Every route is served from one shell, `legal.html`, which the build copies to `[<lang>/]<route>/index.html` with that route's title and description (from `src/legal/routes.ts`). To add a page, add it to `routes.ts` and to each language's `pages`.
-  - The privacy policy describes the game as it is: saves stay on the device, and there are no accounts, ads or analytics.
-  - It also names **GitHub Pages** as the host of the website and the browser game. Update section 5 if you host either somewhere else, and update the policy if the game ever starts collecting data.
+- `/privacy/`, `/terms/`, `/support/`, `/imprint/` (and the same under `/de/` and `/bs/`): the legal and help pages the store listings need. Each language's pages are React components in `src/legal/<lang>/`. Every route is served from one shell, `legal.html`, which the build copies to `[<lang>/]<route>/index.html` with that route's title and description (from `src/legal/routes.ts`). The build also draws each page to HTML with React (`src/legal/ssr.tsx`, `prerenderLegal` in `vite.config.ts`), so the built pages carry their whole text for search engines and readers without JavaScript; in the browser `src/legal/main.tsx` takes the page over. To add a page, add it to `routes.ts` and to each language's `pages`.
+  - The privacy policy describes both games as they are: Starfall Grove's saves stay on the device and it has no accounts; Mini Rift (section 5) has accounts (username, email, password hash), friends, chat (passed on, not stored, except reported messages), match records, its server at MonsterASP.NET and reset emails through Gmail. Neither has ads or analytics.
+  - It also names **GitHub Pages** as the host of the website and the browser games (section 6). Update it if you host anything somewhere else, or if a game starts handling data differently.
 
 ## Search engines and link previews
 
@@ -55,11 +55,13 @@ The site is in English (at the root), German (`/de/`) and Bosnian (`/bs/`). Ever
 
 - **Every page:** a title and description in its language, `canonical` and `hreflang` links (with `x-default`), `robots`, author, Open Graph (with `og:locale:alternate` and the image's size, type and alt text) and Twitter cards, icons and the web manifest (`site.webmanifest`).
 - **The home page:** keywords (`meta.keywords`), the intro film as `og:video`, and structured data (JSON-LD) in its language: the website, its publisher, the game as a `VideoGame` (free, its platforms, heroes and lands, the intro film as its trailer, and the store pages once they are set) and the page's FAQ.
+- **The Mini Rift page:** its own title, description and preview (`minirift/og.jpg`), and structured data: the game as a free `VideoGame` (MOBA, its platforms and store pages), the page, a breadcrumb to the home page and its FAQ.
 - **The legal pages:** their own Open Graph tags and structured data, with a breadcrumb back to the home page.
-- **`sitemap.xml`:** every page in every language, with links to its other languages and the date in `updated`. **`robots.txt`** allows everything and points to it.
+- **Headings:** the logo headings carry a hidden line of keywords (`h1.extra`, `mr.h1.extra`) for search engines and screen readers.
+- **`sitemap.xml`:** every page in every language, with links to its other languages and the date in `updated`; the home and Mini Rift pages weekly and first, with their preview images. **`robots.txt`** allows everything and points to it.
 - **`404.html`:** GitHub Pages shows it for addresses that don't exist. It isn't indexed and links back home.
 
-The link-preview image's size is in `OG_IMAGE` (`src/seo.ts`); change it there if `public/og-image.png` changes. Once the site is live, submit `https://starfallgrove.eu/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
+The link previews are 1200 × 630 JPEGs, `public/og-image.jpg` and `public/minirift/og.jpg` (sizes in `OG_IMAGE` and `MOBA_IMAGE` in `src/seo.ts`); the manifest has 192, 512 and maskable icons. Keep titles under about 60 characters and descriptions between 100 and 155, so search results show them whole. Once the site is live, submit `https://starfallgrove.eu/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
 
 ## The game's art
 

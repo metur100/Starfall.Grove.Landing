@@ -9,8 +9,9 @@ type Words = Record<string, string>;
 /** The heroes and lands of the game, for the game's structured data. Their names are the game's own in every language. */
 const HEROES: Array<[string, string]> = [['Mira', 'mira'], ['Kael', 'kael'], ['Lyra', 'lyra'], ['Riven', 'riven'], ['Wren', 'wren']];
 const LANDS = ['Sunpetal Meadow', 'Whisperroot Woods', 'Starfall Summit', 'The Ember Wastes'];
-/** The link-preview image (public/og-image.png). */
-export const OG_IMAGE = { path: 'og-image.png', width: 1024, height: 1024, type: 'image/png' };
+/** The link-preview image (public/og-image.jpg), and Mini Rift's (public/minirift/og.jpg). */
+export const OG_IMAGE = { path: 'og-image.jpg', width: 1200, height: 630, type: 'image/jpeg' };
+export const MOBA_IMAGE = { path: 'minirift/og.jpg', width: 1200, height: 630, type: 'image/jpeg' };
 
 /** Words without their HTML, for places that only take plain text. */
 export const plain = (html: string) => html.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
@@ -55,6 +56,43 @@ export function homeLd(site: Site, l: Locale, url: string, w: Words, locales: re
   return script({ '@context': 'https://schema.org', '@graph': graph });
 }
 
+/** The Mini Rift page: the game, the page, its FAQ and the breadcrumb back to the home page in its language. */
+export function mobaLd(site: Site, l: Locale, url: string, home: string, w: Words, locales: readonly string[]) {
+  const id = ids(site), image = `${site.siteUrl}${MOBA_IMAGE.path}`, game = `${site.siteUrl}minirift/#game`;
+  const stores = [site.miniriftPlayStoreUrl, site.miniriftAppStoreUrl].filter(Boolean);
+  const faq = Object.keys(w).filter(k => /^mr\.faq\.q\d+$/.test(k)).sort().map(k => ({
+    '@type': 'Question', name: plain(w[k]), acceptedAnswer: { '@type': 'Answer', text: plain(w[k.replace('.q', '.a')] || '') },
+  }));
+  return script({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': ['VideoGame', 'SoftwareApplication'], '@id': game, name: 'Mini Rift', alternateName: plain(w['mr.meta.title']),
+        description: plain(w['mr.meta.description']), url: site.mobaUrl, image: { '@type': 'ImageObject', url: image, width: MOBA_IMAGE.width, height: MOBA_IMAGE.height },
+        genre: ['MOBA', 'Multiplayer online battle arena', 'Action'], gamePlatform: ['Web browser', 'Android', 'iOS'],
+        operatingSystem: 'Web browser, Android, iOS', applicationCategory: 'GameApplication', applicationSubCategory: 'MOBA',
+        playMode: ['MultiPlayer', 'CoOp'], numberOfPlayers: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 6 },
+        inLanguage: 'en', isAccessibleForFree: true, keywords: plain(w['mr.meta.keywords'] || ''),
+        author: { '@id': id.publisher }, publisher: { '@id': id.publisher },
+        isPartOf: { '@type': 'VideoGameSeries', name: site.name, url: site.siteUrl },
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: site.mobaUrl },
+        ...(stores.length ? { sameAs: stores } : {}),
+      },
+      {
+        '@type': 'WebPage', '@id': `${url}#webpage`, url, name: plain(w['mr.meta.title']), description: plain(w['mr.meta.description']), inLanguage: l,
+        isPartOf: { '@id': id.website }, about: { '@id': game }, primaryImageOfPage: image, dateModified: site.updated, breadcrumb: { '@id': `${url}#breadcrumb` },
+      },
+      { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+        { '@type': 'ListItem', position: 1, name: site.name, item: home },
+        { '@type': 'ListItem', position: 2, name: 'Mini Rift', item: url },
+      ] },
+      ...(faq.length ? [{ '@type': 'FAQPage', '@id': `${url}#faq`, inLanguage: l, mainEntity: faq }] : []),
+      { '@type': 'WebSite', '@id': id.website, url: site.siteUrl, name: site.name, inLanguage: locales, publisher: { '@id': id.publisher } },
+      { '@type': 'Person', '@id': id.publisher, name: site.developer, url: site.siteUrl },
+    ],
+  });
+}
+
 /** A legal or help page: the page itself, and the breadcrumb back to the home page in its language. */
 export function legalLd(site: Site, l: Locale, url: string, home: string, homeName: string, title: string, description: string) {
   const id = ids(site);
@@ -74,6 +112,12 @@ export function legalLd(site: Site, l: Locale, url: string, home: string, homeNa
 export const ogAlternates = (og: Record<string, string>, l: Locale) =>
   Object.entries(og).filter(([k]) => k !== l).map(([, v]) => `    <meta property="og:locale:alternate" content="${v}" />`).join('\n');
 
+/** How often each kind of page changes, how much it matters, and its picture: the home page and Mini Rift lead. */
+const SITEMAP: Record<string, { freq: string; prio: [string, string]; image?: string }> = {
+  '': { freq: 'weekly', prio: ['1.0', '0.9'], image: OG_IMAGE.path },
+  'minirift/': { freq: 'weekly', prio: ['0.9', '0.8'], image: MOBA_IMAGE.path },
+};
+
 /** The sitemap: every page in every language, each with links to its other languages. */
 export function sitemap(site: Site, pages: string[], locales: readonly Locale[], prefix: (l: Locale) => string) {
   const at = (l: Locale, p: string) => `${site.siteUrl}${prefix(l)}${p}`;
@@ -81,11 +125,11 @@ export function sitemap(site: Site, pages: string[], locales: readonly Locale[],
     '  <url>',
     `    <loc>${at(l, p)}</loc>`,
     `    <lastmod>${site.updated}</lastmod>`,
-    `    <changefreq>${p ? 'yearly' : 'weekly'}</changefreq>`,
-    `    <priority>${p ? '0.3' : l === 'en' ? '1.0' : '0.9'}</priority>`,
+    `    <changefreq>${SITEMAP[p]?.freq ?? 'yearly'}</changefreq>`,
+    `    <priority>${SITEMAP[p] ? SITEMAP[p].prio[l === 'en' ? 0 : 1] : '0.3'}</priority>`,
     ...locales.map(x => `    <xhtml:link rel="alternate" hreflang="${x}" href="${at(x, p)}" />`),
     `    <xhtml:link rel="alternate" hreflang="x-default" href="${at('en', p)}" />`,
-    ...(p ? [] : [`    <image:image><image:loc>${site.siteUrl}${OG_IMAGE.path}</image:loc></image:image>`]),
+    ...(SITEMAP[p]?.image ? [`    <image:image><image:loc>${site.siteUrl}${SITEMAP[p].image}</image:loc></image:image>`] : []),
     '  </url>',
   ].join('\n')));
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.join('\n')}\n</urlset>\n`;
@@ -97,7 +141,12 @@ export const robots = (site: Site) => `# Every page of the Starfall Grove websit
 export const manifest = (site: Site, base: string, description: string) => JSON.stringify({
   name: site.name, short_name: site.name, description, start_url: base, scope: base, display: 'browser', lang: 'en',
   background_color: '#1d1520', theme_color: '#1d1520',
-  icons: [{ src: `${base}icon-192.png`, sizes: '192x192', type: 'image/png' }, { src: `${base}apple-touch-icon.png`, sizes: '180x180', type: 'image/png' }],
+  icons: [
+    { src: `${base}icon-192.png`, sizes: '192x192', type: 'image/png' },
+    { src: `${base}icon-512.png`, sizes: '512x512', type: 'image/png' },
+    { src: `${base}icon-maskable-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+    { src: `${base}apple-touch-icon.png`, sizes: '180x180', type: 'image/png' },
+  ],
 }, null, 2) + '\n';
 
 /** GitHub Pages serves 404.html for any address that doesn't exist: a short page that points home and isn't indexed. */
